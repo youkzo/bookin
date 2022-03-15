@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{#타이틀 넣는 곳#}
+{% block title %}
+    Main
+{% endblock %}
+
+{# css 파일 넣는 곳#}
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+{% endblock %}
+
+{#자바스크립트 파일 넣는 곳#}
+{% block js %}
+    {#<script type="text/javascript" src="{% static '/js/해당앱.js' %}"></script>#}
+{% endblock %}
+
+{#메인 컨텐츠 들어가는 곳#}
+{% block content %}
+
+메인페이지
+stores
+<div>
+    <p>
+        전체스토어
+    </p>
+</div>
+<div class="store_wrap">
+    {% for store in stores %}
+        <div class="store_img">
+        <img src="{{store.store_img}}" onclick="location.href = '{% url 'detail' store.user_id %}'">
+        <p>{{store.store_name}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
