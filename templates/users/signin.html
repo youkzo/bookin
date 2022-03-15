@@ -9,12 +9,10 @@
   </head>
 
   <body>
-    <form action="/sign-up/" method="POST">
+    <form action="/sign-in/" method="POST">
       {% csrf_token %}
-      <input id="email" name="email" type="text" placeholder="email">
-      <input id="username" name="username" type="text" placeholder="username">
+      <input id="email" name="email" type="email" placeholder="email">
       <input id="password" name="password" type="password" placeholder="password">
-      <input id="password2" name="password2" type="password" placeholder="password2">
       <button type="submit"></button>
     </form>
   </body>
