@@ -2,18 +2,15 @@
 name = "bookin"
 version = "0.1.0"
 description = ""
-authors = ["youzo <youzo@bookin.com>"]
+authors = ["youkzo <youkzo@bookin.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.9"
 Django = "^4.0.3"
 django-environ = "^0.8.1"
-django-ninja = "^0.17.0"
-isort = "^5.10.1"
-cryptography = "^36.0.1"
-django-ninja-jwt = "^5.1.8"
 
 [tool.poetry.dev-dependencies]
+isort = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
