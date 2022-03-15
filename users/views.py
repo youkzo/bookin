@@ -11,7 +11,7 @@ def sign_up_view(request):
     if request.method == 'GET':
         return render(request, 'users/signup.html')
     elif request.method == 'POST':
-        username = request.POST.get('gusername', '')
+        username = request.POST.get('username', '')
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
