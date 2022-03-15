@@ -1,0 +1,14 @@
+.store_img{
+    width: 200px;
+    height: 200px;
+    margin: 5%;
+}
+.store_img img{
+    width: 100%;
+    height: 100%;
+}
+.store_wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

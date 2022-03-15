@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | Bookin</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <!-- <link href="/static/img/파비콘.PNG" rel="shortcut icon" type="image/x-icon"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shizuru&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <nav id="menu_container">
+        <div id="menu_logo">
+            <p>LOGO</p>
+        </div>
+        <div id="menu_search">
+            <input name="search" placeholder="search...">
+        </div>
+        
+        <div id="menu_sign">
+            {% if not user.is_authenticated %}
+            <a href="/sign-in"><p>login</p></a>
+            <!-- <a href="/sign-up"><p>signup</p></a> -->
+            {% else%}
+            <a href="/logout"><p>logout</p></a>
+            <p>Hello! {{user.username}}</p>
+            {% endif %}
+        </div>
+        
+        
+    </nav>
+    
+<div class="base_content">
+    {% block content %}
+    {% endblock %}
+</div>
+{% block js %}
+{% endblock %}
+</body>
+</html>
