@@ -13,8 +13,14 @@
       {% csrf_token %}
       <input id="email" name="email" type="email" placeholder="email">
       <input id="password" name="password" type="password" placeholder="password">
-      <button type="submit"></button>
-    </form>
-  </body>
+      <button type="submit">로그인</button>
+      {% if error %}
+        <p>
+          {{ error }}
+        </p>
+      </div>
+    {% endif %}
+  </form>
+</body>
 
 </html>

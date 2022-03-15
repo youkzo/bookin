@@ -15,8 +15,14 @@
       <input id="username" name="username" type="text" placeholder="username">
       <input id="password" name="password" type="password" placeholder="password">
       <input id="password2" name="password2" type="password" placeholder="password2">
-      <button type="submit"></button>
-    </form>
-  </body>
+      <button type="submit">회원가입</button>
+      {% if error %}
+        <p>
+          {{ error }}
+        </p>
+      </div>
+    {% endif %}
+  </form>
+</body>
 
 </html>
