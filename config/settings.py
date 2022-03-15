@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'chat',
     'like',
     'search',
-    'ninja_jwt',
 ]
 
 MIDDLEWARE = [
