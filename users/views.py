@@ -1,24 +1,17 @@
-import os
-from django.contrib import messages
+
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
-from django.views import View
+
 from users.models import UserModel
-from django.http import HttpResponse
 from django.contrib.auth import get_user_model  # 사용자가 데이터베이스 안에 있는지 검사하는 함수
 from django.contrib import auth
-from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
-import string
-import random
 
 
 def sign_up_view(request):
     if request.method == 'GET':
         return render(request, 'users/signup.html')
     elif request.method == 'POST':
-        username = request.POST.get('username', '')
+        username = request.POST.get('gusername', '')
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
