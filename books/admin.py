@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from books.models import BookRentByUser, BooksModel
+
+admin.site.register(BooksModel)
+admin.site.register(BookRentByUser)
