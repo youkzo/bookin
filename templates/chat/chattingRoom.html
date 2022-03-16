@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+채팅 방
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script src={% static 'js/socket.js' %}></script>
+{% endblock %}
+
+{% block content %}
+<div>{{ room.messages.count }}</div>
+{% endblock %}

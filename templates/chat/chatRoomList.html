@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+{% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block js %}
+<script>
+    function goChat(e){
+        username = e.innerHTML.split(",")[1].trim();
+        window.location.href = `/chatting_room/${username}`
+    }
+</script>
+{% endblock %}
+
+
+{% block content %}
+{% for room in rooms %}
+<div class="flex flex-col w-32">
+    <div onclick="goChat(this)" class="p-5 cursor-pointer">{{ room }}</div>
+</div>
+{% endfor %}
+{% endblock %}
