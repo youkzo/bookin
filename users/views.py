@@ -46,3 +46,8 @@ def sign_in_view(request):
             return redirect('/')
         else:
             return render(request, 'users/signin.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("/sign-in")
