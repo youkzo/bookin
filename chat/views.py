@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from chat.services import go_chat_room, my_chat_rooms_load
+
+from chat.services import create_message, go_chat_room, my_chat_rooms_load
 
 
 def chat_room_list(request):
@@ -22,4 +24,8 @@ def chatting_room(request, username):
         else:
             return redirect('/')
     elif request.method == 'POST':
-        pass
+        user = request.user
+        message = request.POST.get('message', '')
+        chat_room_id = request.POST.get('chat_room_id', '')
+        result = create_message(user, chat_room_id, message)
+        return HttpResponse(result)
