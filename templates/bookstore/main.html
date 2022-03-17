@@ -35,13 +35,9 @@
 {% block content %}
 
 메인슬릭(예시)
-    <div class="main_top">
-        <div class="slick_imgs">
-            <img src="{% static '/img/main_1.jpg' %}">
-        </div>
-        <div class="slick_imgs">
-            <img src="{% static '/img/main_2.jpg' %}">
-        </div>
+    <div class="main_top">       
+            <img  src="{% static '/img/main_1.jpg' %}">  
+            <img  src="{% static '/img/main_2.jpg' %}">    
     </div>
     <!-- 실제데이터 들어오는 곳(추후수정) -->
     <!-- <div id="main_top">
@@ -60,14 +56,14 @@
 stores
 
 <div>
-    <p>
+    <p class="decoration-sky-500">
         전체스토어
     </p>
 </div>
 <div class="store_wrap">
     {% for store in stores %}
         <div class="store_img">
-            <img src="{{store.store_img}}" onclick="location.href = '{% url 'detail' store.user_id.pk %}'">
+            <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.user_id.pk %}'">
             <p>{{store.store_name}}</p>
             owener id: {{store.user_id.pk}}
         </div>
@@ -75,3 +71,6 @@ stores
 </div>
 
 {% endblock %}
+
+
+

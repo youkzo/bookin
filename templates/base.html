@@ -20,7 +20,7 @@
 
 </head>
 <body>
-    <nav id="menu_container">
+    <nav id="menu_container" class="grid grid-cols-[150px_1fr_150px]">
         <div id="menu_logo">
             <img src="{% static '/img/logo.jpg' %}">
         </div>
@@ -41,10 +41,10 @@
         
     </nav>
     
-<div class="base_content">
-    {% block content %}
-    {% endblock %}
-</div>
+
+{% block content %}
+{% endblock %}
+
 {% block js %}
 {% endblock %}
 </body>
