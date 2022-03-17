@@ -10,30 +10,67 @@
 {# css 파일 넣는 곳#}
 {% block css %}
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <!-- 메인슬릭 -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 {% endblock %}
 
 {#자바스크립트 파일 넣는 곳#}
 {% block js %}
     {#<script type="text/javascript" src="{% static '/js/해당앱.js' %}"></script>#}
+    <!-- 메인슬릭 -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript">
+        $('.main_top').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 3000,
+          });
+    </script>
 {% endblock %}
 
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
 
-메인페이지
+메인슬릭(예시)
+    <div class="main_top">       
+            <img  src="{% static '/img/main_1.jpg' %}">  
+            <img  src="{% static '/img/main_2.jpg' %}">    
+    </div>
+    <!-- 실제데이터 들어오는 곳(추후수정) -->
+    <!-- <div id="main_top">
+        {% for img in imgs %}
+            <div id="main_content{{ img.id }}" class="main_content">
+                <img src="{{ img.img }}">
+                <div class="main_title">
+                    <p>{{ img.title }}</p>
+                </div>
+            </div>
+       {% endfor %}
+    </div> -->
+
+
+
 stores
+
 <div>
-    <p>
+    <p class="decoration-sky-500">
         전체스토어
     </p>
 </div>
 <div class="store_wrap">
     {% for store in stores %}
         <div class="store_img">
-        <img src="{{store.store_img}}" onclick="location.href = '{% url 'detail' store.user_id %}'">
-        <p>{{store.store_name}}</p>
+            <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.user_id.pk %}'">
+            <p>{{store.store_name}}</p>
+            owener id: {{store.user_id.pk}}
         </div>
     {% endfor %}
 </div>
 
 {% endblock %}
+
+
+

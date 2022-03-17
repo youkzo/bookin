@@ -1,0 +1,44 @@
+.bg_img{
+    width: 100vw;
+    height: 45vh;
+}
+
+#books_wrap{
+    display: flex;
+}
+
+.sales_book{
+    width: 250px;
+    height: 400px;
+    margin: 5%;
+
+}
+
+#store_info{
+    display: flex;
+    justify-content: center;
+
+}
+
+#info_edit{
+    position: absolute;
+    top: 40vh;
+
+}
+
+/* 도서목록리스트 */
+.selling_book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selling_book_img {
+    width: 100px;
+}
+
+
+/* 도서업로드 */
+div#upload_wrap {
+    border: 2px solid gray;
+    width: 300px;
+}

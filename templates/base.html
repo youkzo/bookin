@@ -17,11 +17,13 @@
     
     {% block css %}
     {% endblock %}
+
+
 </head>
 <body>
-    <nav id="menu_container">
+    <nav id="menu_container" class="grid grid-cols-[150px_1fr_150px]">
         <div id="menu_logo">
-            <p>LOGO</p>
+            <img src="{% static '/img/logo.jpg' %}">
         </div>
         <div id="menu_search">
             <input name="search" placeholder="search...">
@@ -40,10 +42,10 @@
         
     </nav>
     
-<div class="base_content">
-    {% block content %}
-    {% endblock %}
-</div>
+
+{% block content %}
+{% endblock %}
+
 {% block js %}
 {% endblock %}
 </body>
