@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-
 from chat.services import create_message, go_chat_room, my_chat_rooms_load
 
 
