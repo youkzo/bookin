@@ -1,6 +1,6 @@
 from django.test import TestCase
-from chat.services import go_chat_room, my_chat_rooms_load
 
+from chat.services import go_chat_room, my_chat_rooms_load
 from users.models import UserModel
 
 
