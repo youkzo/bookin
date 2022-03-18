@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('books.urls')),
     path('', include('chat.urls')),
+    path('', include('search.urls')),
     path('bookstore', include('bookstore.urls')),
 ]
