@@ -7,10 +7,12 @@ from users.models import UserModel
 
 
 def store(request, user_pk):
-    owner = UserModel.objects.get(pk=user_pk)
-    store = BookStoreModel.objects.get(user_id=user_pk)
-    books = BooksModel.objects.filter(user_id=user_pk)
-    print(request.user.pk)
+    try:
+        owner = UserModel.objects.get(pk=user_pk)
+        store = BookStoreModel.objects.get(user_id=user_pk)
+        books = BooksModel.objects.filter(user_id=user_pk)
+    except BookStoreModel.DoesNotExist:
+        return render(request, 'bookstore/store.html', {'owner': owner})
 
     # 도서업로드시books모델에추가
     if request.method == "POST":

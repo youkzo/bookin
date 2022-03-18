@@ -21,23 +21,27 @@
 
 </head>
 <body>
-    <nav id="menu_container" class="grid grid-cols-[150px_1fr_150px]">
+    <nav id="menu_container" class="grid grid-cols-[150px_1fr_150px_150px]">
         <div id="menu_logo">
             <a href="/"><img src="{% static '/img/logo.jpg' %}"></a>
         </div>
         <div id="menu_search">
             <input name="search" placeholder="search...">
         </div>
-        
+        {% if not user.is_authenticated %}
         <div id="menu_sign">
-            {% if not user.is_authenticated %}
             <a href="/sign-in"><p>login</p></a>
-            <!-- <a href="/sign-up"><p>signup</p></a> -->
-            {% else%}
-            <a href="/logout"><p>logout</p></a>
-            <p>Hello! {{user.username}}</p>
-            {% endif %}
+            <a href="/sign-up"><p>signup</p></a>
         </div>
+        {% else%}
+        <div>
+            <p>Hello! {{user.username}}</p>    
+            <a href="/logout"><p>logout</p></a>
+        </div>
+        <div id="menu_mystore">
+            <p onclick="location.href = '{% url 'store' request.user.pk %}'">mystore</p>
+        </div>
+        {% endif %}
         
         
     </nav>
