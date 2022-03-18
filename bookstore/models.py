@@ -7,7 +7,7 @@ class BookStoreModel(BaseModel):
     class Meta:
         db_table = "book_store"
 
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         'users.UserModel', on_delete=models.CASCADE, related_name="bookstore", db_column="user_id")
     store_name = models.CharField(max_length=50)
     store_info = models.TextField()
