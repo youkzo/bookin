@@ -42,7 +42,7 @@
     <div id="books_wrap">
     {% for book in books%}
         <div class="sales_book">
-            <img src="{{ book.book_img}}">
+            <img src="{{ book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
             <div>
                 {{ book.book_name}}
             </div>
@@ -94,7 +94,15 @@
             평점<input name="book_rating" placeholder="평점입력">
         </div>
         <div>
-            카테고리<input name="category" placeholder="카테고리">
+            <label for="category">카테고리선택:</label>
+            <select id="category" name="category">
+                <option value="소설">문학</option>
+                <option value="만화">만화</option>
+                <option value="실용서">실용서</option>
+                <option value="잡지">잡지</option>
+                <option value="참고서">참고서</option>
+            </select>
+            <input type="dropdown" name="category" placeholder="직접입력">
         </div>
         <div>
         

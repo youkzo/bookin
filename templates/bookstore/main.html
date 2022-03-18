@@ -65,7 +65,7 @@ stores
         <div class="store_img">
             <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.user_id.pk %}'">
             <p>{{store.store_name}}</p>
-            owener id: {{store.user_id.pk}}
+            owner id: {{store.user_id.pk}}
         </div>
     {% endfor %}
 </div>

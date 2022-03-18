@@ -33,3 +33,7 @@ def store(request, user_pk):
 
 
     return render(request, 'bookstore/store.html', {'owner': owner, 'store': store, 'books':books})
+
+def detail(request, book_pk):
+    book = BooksModel.objects.get(pk=book_pk)
+    return render(request, 'bookstore/detail.html', {'book':book})
