@@ -29,7 +29,7 @@
             <input name="search" placeholder="search...">
         </div>
         {% if not user.is_authenticated %}
-        <div id="menu_sign">
+        <div id="menu_sign" class="grid grid-cols-[50px_50px]">
             <a href="/sign-in"><p>login</p></a>
             <a href="/sign-up"><p>signup</p></a>
         </div>
@@ -39,7 +39,7 @@
             <a href="/logout"><p>logout</p></a>
         </div>
         <div id="menu_mystore">
-            <p onclick="location.href = '{% url 'store' request.user.pk %}'">mystore</p>
+            <p onclick="location.href = '{% url 'mystore' request.user.pk %}'">mystore</p>
         </div>
         {% endif %}
         

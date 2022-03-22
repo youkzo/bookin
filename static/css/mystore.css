@@ -1,0 +1,38 @@
+.bg_img{
+    width: 100vw;
+    height: 45vh;
+}
+#store_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#store_info {
+    display: flex;
+    justify-content: center;
+}
+
+
+#store_register{
+    border: 1px solid black;
+    width: 500px;
+}
+
+#books_upload{
+    border: 1px solid black;
+    width: 500px;
+}
+
+#uploaed_book_wrap{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+#uploaed_book {
+    margin: 2%;
+}
+
+#uploaed_book img {
+    width: 20vw;
+}

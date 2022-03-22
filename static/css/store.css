@@ -3,6 +3,12 @@
     height: 45vh;
 }
 
+.bg_img_ {
+    width: 100vw;
+    height: 45vh;
+    background-color: bisque;
+}
+
 #books_wrap{
     display: flex;
 }
