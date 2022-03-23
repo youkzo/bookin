@@ -58,14 +58,15 @@ stores
 <div>
     <p class="decoration-sky-500">
         전체스토어
+        request.user: {{ request.user.pk }}
     </p>
 </div>
 <div class="store_wrap">
     {% for store in stores %}
         <div class="store_img">
-            <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.user_id.pk %}'">
+            <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.pk %}'">
             <p>{{store.store_name}}</p>
-            owener id: {{store.user_id.pk}}
+            store_id: {{store.pk}}
         </div>
     {% endfor %}
 </div>

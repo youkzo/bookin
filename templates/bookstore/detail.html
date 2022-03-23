@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{#타이틀 넣는 곳#}
+{% block title %}
+    책이름
+{% endblock %}
+
+{# css 파일 넣는 곳#}
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/detail.css' %}">
+{% endblock %}
+
+{#자바스크립트 파일 넣는 곳#}
+{% block js %}
+    <script type="text/javascript" src="{% static '/js/detail.js' %}"></script>
+{% endblock %}
+
+{#메인 컨텐츠 들어가는 곳#}
+{% block content %}
+책디테일 페이지
+    book pk: {{ book.pk }}title: {{book.book_name }} category: {{book.user_id }}
+
+<div id="detail_wrap">
+    <img src="{{ book.book_img }}">
+    <div class="book_title">[{{book.book_name }}]</div>
+    <div id="for_user">
+        {% if book.is_rent == True %}
+        <div id="onsale"><span>대여가능</span></div>
+        {% else %}
+        <div id="rented"><span>대여중</span></div>
+        {% endif %}
+    </div>
+    <!-- <div id="for_owner">
+        <span> On sale </span>
+                    <input id="sale_view" name="sale_status" type="checkbox" checked>
+    </div> -->
+    <div class="book_info">카테고리: {{book.category }}</div>
+    <div class="book_info">평점: {{book.user_id }}</div>
+    <div class="book_content"> {{book.content}} </div>
+    <div id="send_chat"><span>CHAT</span></div>
+</div>
+
+
+{% endblock %}

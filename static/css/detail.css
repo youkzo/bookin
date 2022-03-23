@@ -1,0 +1,75 @@
+#detail_wrap{
+    border: 1px solid gray;
+    width: 60vw;
+    height: 90vh;
+    border-radius: 25px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#detail_wrap img {
+    width: 20vw;
+    margin-top: 5%;
+}
+
+.book_title {
+    font-size: 30px;
+    font-weight: bolder;
+    margin-top: 1%;
+}
+
+.book_info {
+    font-size: 15px;
+    margin: 2% 0 0 0;
+}
+
+.book_content {
+    width: 20vw;
+    margin-top: 3%;
+}
+
+div#onsale {
+    /* border: 1px solid gray; */
+    width: 75px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 15%;
+    background-color: powderblue;
+    font-size: 13px;
+}
+
+div#rented {
+    /* border: 1px solid gray; */
+    width: 75px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 15%;
+    background-color: lightgray;
+    font-size: 13px;
+}
+
+span {
+    vertical-align: sub;
+}
+
+div#send_chat {
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 2%;
+    background-color: navy;
+    font-size: 13px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#for_user{
+    display: flex;
+    flex-direction: row;
+}

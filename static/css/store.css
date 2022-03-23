@@ -3,6 +3,12 @@
     height: 45vh;
 }
 
+.bg_img_ {
+    width: 100vw;
+    height: 45vh;
+    background-color: bisque;
+}
+
 #books_wrap{
     display: flex;
 }
@@ -38,7 +44,14 @@
 
 
 /* 도서업로드 */
-div#upload_wrap {
-    border: 2px solid gray;
-    width: 300px;
+dialog#upload_books {
+    border: 1px solid gray;
+    border-radius: 10px;
+    top: 100px;
+    width: 500px;
+    height: 650px;
+}
+
+#upload_wrap{
+    border: none;
 }
