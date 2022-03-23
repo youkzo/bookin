@@ -6,7 +6,7 @@ from search.services import search_book_and_bookstore
 from users.models import UserModel
 
 
-class TestSearcher(TestCase):
+class TestSearch(TestCase):
     def test_search_book_and_bookstore(self):
         # Given
         test_user = UserModel.objects.create(
