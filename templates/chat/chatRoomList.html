@@ -14,7 +14,7 @@
 {% block js %}
 <script>
     function goChat(e){
-        me = {{ user.username }}
+        me = '{{ user.username }}'
         username1 = e.innerHTML.split(",")[0].trim();
         username2 = e.innerHTML.split(",")[1].trim();
         if (me != username1){

@@ -39,7 +39,9 @@
     <div class="book_info">카테고리: {{book.category }}</div>
     <div class="book_info">평점: {{book.user_id }}</div>
     <div class="book_content"> {{book.content}} </div>
-    <div id="send_chat"><span>CHAT</span></div>
+    <a href="/chatting_room/{{ book.user.username }}">
+        <div id="send_chat" onclick="goChat()"><span>CHAT</span></div>
+    </a>
 </div>
 
 
