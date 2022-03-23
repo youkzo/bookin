@@ -14,9 +14,20 @@
 
 
 {% block content %}
-<form action="/api/upload-user-img" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="file" accept="image/*">
-    <button>변경하기</button>
-</form>
+<div>
+    <form action="{% url 'upload-user-image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file" accept="image/*">
+        <button>변경하기</button>
+    </form>
+    <form action="{% url 'my-page' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name='username' placeholder='유저네임'>
+        <input type="password" name='password' placeholder='비밀번호'>
+        <input type="password" name='password2' placeholder='비밀번호 확인'>
+        <button>변경하기</button>
+    </form>
+</div>
+
+
 {% endblock %}

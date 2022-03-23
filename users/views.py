@@ -6,7 +6,7 @@ from users.models import UserModel
 from django.contrib import auth
 
 from users.services.auth_services import create_an_user
-from users.services.profile_services import upload_user_image
+from users.services.profile_services import upload_user_image, user_password_update, user_username_update
 
 
 def sign_up_view(request):
@@ -54,6 +54,13 @@ def logout(request):
     return redirect("/sign-in")
 
 
+def delete_user(request):
+    auth.logout(request)
+    user = UserModel.objects.filter(id=request.user.id).get()
+    user.delete()
+    return redirect("/")
+
+
 def my_profile_page(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
@@ -62,11 +69,18 @@ def my_profile_page(request):
         else:
             return redirect("/")
     elif request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
 
-        pass
+        if username != request.user.username:
+            user_username_update(request.user.id, username)
+        if password:
+            user = user_password_update(request.user.id, password)
+
+        return redirect('/my-page')
 
 
-def update_image(request):
+def user_image_post(request):
     file = request.FILES['file']
     upload_user_image(file, request.user.id)
     return redirect('/my-page')
