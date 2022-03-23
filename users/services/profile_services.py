@@ -5,6 +5,9 @@ from users.models import UserModel
 
 def user_username_update(id, username):
     user = UserModel.objects.get(id=id)
+    exists_user = UserModel.objects.filter(username=username).exists()
+    if exists_user:
+        return '이미 사용하고 있는 유저가 있습니다'
     user.username = username
     user.save()
     return

@@ -69,15 +69,18 @@ def my_profile_page(request):
         else:
             return redirect("/")
     elif request.method == 'POST':
+        message = ''
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
 
         if username != "" and username != request.user.username:
-            user_username_update(request.user.id, username)
+            message = user_username_update(request.user.id, username)
         if password:
-            user = user_password_update(request.user.id, password)
+            user_password_update(request.user.id, password)
 
-        return redirect('/my-page')
+        if message:
+            return render(request, 'users/profile.html', {'message': message})
+        return redirect("/my-page")
 
 
 def user_image_post(request):
