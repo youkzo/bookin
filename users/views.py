@@ -72,7 +72,7 @@ def my_profile_page(request):
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
 
-        if username != request.user.username:
+        if username != "" and username != request.user.username:
             user_username_update(request.user.id, username)
         if password:
             user = user_password_update(request.user.id, password)
