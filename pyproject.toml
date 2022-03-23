@@ -8,6 +8,7 @@ authors = ["youkzo <youkzo@bookin.com>"]
 python = "^3.9"
 Django = "^4.0.3"
 django-environ = "^0.8.1"
+boto3 = "^1.21.21"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"
