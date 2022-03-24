@@ -132,7 +132,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "users.UserModel"
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 AWS_S3_BUCKET_NAME = os.environ['AWS_S3_BUCKET_NAME']
 AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
