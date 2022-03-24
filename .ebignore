@@ -1,0 +1,12 @@
+node_modules/
+package*.json
+tailwind.config.js
+gulpfile.js
+
+.vscode/
+.idea/
+
+assets/
+
+poetry.lock
+pyproject.toml
