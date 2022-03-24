@@ -4,11 +4,11 @@ from core.models import BaseModel
 
 
 class LikeModel(BaseModel):
-    class Meta:
-        db_table = "like"
-
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         'users.UserModel', related_name="like", on_delete=models.CASCADE)
-
-    book_id = models.ForeignKey(
+    book = models.ForeignKey(
         'books.BooksModel', related_name="like", on_delete=models.CASCADE)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(
+            fields=["user", "book"], name="unique_user_book")]
