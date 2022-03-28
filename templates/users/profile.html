@@ -50,16 +50,23 @@
             </label>
         </form>
     </div>
-    <div>
+    <div class="flex flex-col justify-center items-center">
         <form action="{% url 'my-page' %}" method="post">
             {% csrf_token %}
             <input id="usernameInput" type="text" oninput="onUsernameChange(this)" name='username' placeholder='유저네임' value="{{ user.username }}"required>
-            <div>
-                <input type="password" id="password" name='password' pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" placeholder='비밀번호' disabled required>
-                <input type="password"  id="password2" name='password2' placeholder='비밀번호 확인' disabled required>
-                <div onclick="passwordCanChangeBtn(this)" class="cursor-pointer">비밀번호 변경</div>
+            <div class="flex">
+                <div class="flex flex-col">
+                    <input type="password" id="password" name='password' pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" placeholder='비밀번호' disabled required>
+                    <div class="text-sm">비밀번호는 대﹒소문자 포함, 특수문자 포함, 숫자포함 8자이상 입니다</div>
+                    <input type="password"  id="password2" name='password2' placeholder='비밀번호 확인' disabled required>
+                </div>
+                <div class="flex justify-center items-start w-40 mt-10">
+                    <div onclick="passwordCanChangeBtn(this)" class="cursor-pointer">비밀번호 변경</div>
+                </div>
             </div>
-            <button id="profileBtn" class="mt-6 bg-blue-900 border border-transparent rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:outline" disabled>변경하기</button>
+            <div class="w-full flex justify-center items-center">
+                <button id="profileBtn" class="mt-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border" disabled>변경하기</button>
+            </div>
         </form>
     </div>
 </div>
