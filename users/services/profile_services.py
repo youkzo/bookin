@@ -1,4 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.db.models import Prefetch
+from like.models import LikeModel
+from books.models import BooksModel
 from core.services import image_upload
 from users.models import UserModel
 
@@ -26,3 +29,10 @@ def upload_user_image(file, id):
     user.user_image = url
     user.save()
     return
+
+
+def get_my_book_list(user_id, offset, limit):
+    return BooksModel.objects.filter(user_id=user_id).order_by("-id").prefetch_related(
+        Prefetch("like", queryset=LikeModel.objects.filter(
+            user_id=user_id), to_attr="my_likes")
+    )[offset: offset + limit]
