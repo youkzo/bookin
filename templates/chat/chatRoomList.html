@@ -14,24 +14,37 @@
 {% block js %}
 <script>
     function goChat(e){
-        me = '{{ user.username }}'
-        username1 = e.innerHTML.split(",")[0].trim();
-        username2 = e.innerHTML.split(",")[1].trim();
-        if (me != username1){
-            window.location.href = `/chatting_room/${username1}`
-        }
-        if (me != username2){
-            window.location.href = `/chatting_room/${username2}`
-        }
+        username = e.innerHTML.trim();
+        window.location.href = `/chatting_room/${username}`
     }
 </script>
 {% endblock %}
 
 
 {% block content %}
-{% for room in rooms %}
-<div class="flex flex-col w-32">
-    <div onclick="goChat(this)" class="p-5 m-3 cursor-pointer bg-yellow-300">{{ room }}</div>
+<div class="w-full h-screen flex justify-center">
+    <div class="container pt-10">
+        <div class="text-2xl p-8">채팅 방 리스트</div>
+        {% for room in rooms %}
+            {% for chat_room_user in room.participants.all %}
+                {% if user.username != chat_room_user.username %}
+                <a class="flex w-full border-b-2" href="/chatting_room/{{chat_room_user.username}}">
+                    <div class="flex justify-center items-center ml-5">
+                        <img class="w-16 h-16 rounded-full" src="{{ chat_room_user.user_image }}" alt="">
+                    </div>
+                    <div class="p-5 m-3">
+                        <div class="text-lg font-bold mb-3">
+                            {{ chat_room_user.username }}
+                        </div>
+                        <div >
+                            {{ room.messages.all.last }}
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
 </div>
-{% endfor %}
+
 {% endblock %}

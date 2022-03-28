@@ -12,7 +12,7 @@ class Message(BaseModel):
     )
 
     def __str__(self):
-        return f"{self.user} says: {self.message}"
+        return f"{self.user.username} : {self.message}"
 
 
 class ChatRoom(BaseModel):

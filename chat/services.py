@@ -19,7 +19,8 @@ def go_chat_room(store_user_id, request_user_username):
 def my_chat_rooms_load(store_user_id):
     user = UserModel.objects.filter(id=store_user_id).get()
     if user is not None:
-        chatRooms = ChatRoom.objects.filter(participants=user)
+        chatRooms = ChatRoom.objects.filter(
+            participants=user).order_by("-updated_at")
         return chatRooms
 
 
