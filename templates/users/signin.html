@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,22 +6,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
   </head>
 
   <body>
-    <form action="/sign-in/" method="POST">
-      {% csrf_token %}
-      <input id="email" name="email" type="email" placeholder="email">
-      <input id="password" name="password" type="password" placeholder="password">
-      <button type="submit">로그인</button>
-      {% if error %}
-        <p>
-          {{ error }}
-        </p>
+
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-md w-full space-y-8">
+        <div>
+          <img class="mx-auto h-12 w-auto" src="{% static '/img/logo.jpg' %}" alt="Workflow">
+          <h2 class="mt-6  text-center text-3xl font-extrabold text-gray-900">Bookin에 오신걸 환영합니다</h2>
+          <p class="mt-2 text-center text-sm text-gray-600">
+            책 대여 플랫폼 bookin을 이용해보세요.
+          </p>
+        </div>
+        <form class="mt-8 space-y-6" action="/sign-in/" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="remember" value="true">
+          <div class="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label for="email-address" class="block text-sm font-medium text-gray-700">이메일</label>
+              <input id="email-address" name="email" type="email" autocomplete="email" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이메일">
+            </div>
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-700">비밀번호</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end">
+            <div class="text-sm">
+              <a href="/find-password/" class="font-medium text-blue-600 hover:text-blue-500">
+                비밀번호를 잊으셨나요?
+              </a>
+            </div>
+          </div>
+
+          {% if error %}
+            <div class="flex items-center justify-center mb-2 " role="alert">
+              <p class="text-red-600">
+                {{ error }}
+              </p>
+            </div>
+          {% endif %}
+          <div>
+
+            <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-900 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <!-- Heroicon name: solid/lock-closed -->
+
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+              </svg>
+            </span>
+            로그인
+          </button>
+          <button type="button" onclick="location.href='/sign-up/'" class="group relative w-full flex justify-center mt-4 mb-2 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-400">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <!-- Heroicon name: solid/lock-closed -->
+
+              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+            </svg>
+          </span>
+          새 계정 만들기
+        </button>
+
       </div>
-    {% endif %}
-  </form>
+    </form>
+  </div>
+</div>
 </body>
 
 </html>

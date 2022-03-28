@@ -12,8 +12,6 @@
 {% block js %}
 <script src={% static 'js/socket.js' %}></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-     });
     const me = '{{ user.username }}'
     const roomId = '{{ room.id }}'
     const url = '{{ request.path }}'
@@ -35,7 +33,7 @@
                           </div>
                         </div>`;
         }
-        if (messageBox.innerHTML.trim() == "no messages") {
+        if (messageBox.innerHTML.trim() == "메세지가 없습니다") {
           messageBox.innerHTML = html;
         } else {
           messageBox.innerHTML += html;
@@ -74,7 +72,7 @@
 </form>
 <div id="messageBox">
     {% if room.messages.count == 0 %}
-        no messages
+        메세지가 없습니다
     {% else %}
         {% for message in room.messages.all  %}
             <div class="mb-10 {% if message.user.username == user.username %}

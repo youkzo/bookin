@@ -53,6 +53,7 @@
     <div class="book_info">카테고리: {{book.category }}</div>
     <div class="book_info">평점: {{book.rating }}</div>
     <div class="book_content"> {{book.content}} </div>
+<<<<<<< HEAD
     {% if request.user.pk != book.user.id %}
         <a href="/chatting_room/{{ book.user.username }}">
             <div id="send_chat" onclick="goChat()"><span>CHAT</span></div>
@@ -145,6 +146,12 @@
         
     }
 </script> -->
+=======
+    <a href="/chatting_room/{{ book.user.username }}">
+        <div id="send_chat" onclick="goChat()"><span>CHAT</span></div>
+    </a>
+</div>
+>>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 
 
 {% endblock %}
