@@ -29,3 +29,4 @@ class BookRentByUser(BaseModel):
         "users.UserModel", related_name="rent", on_delete=models.CASCADE)
     book = models.ForeignKey(
         "BooksModel", related_name="rent", on_delete=models.CASCADE)
+    exp_date = models.DateField(null=True)

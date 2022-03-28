@@ -1,4 +1,4 @@
-// 모달팝업창
+// 스토어등록 & 도서업로드 모달팝업창
 $(function(){
     $(".upload").click(function(){
         $("#upload_books").show();

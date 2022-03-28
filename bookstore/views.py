@@ -13,13 +13,17 @@ def mystore(request, pk):
         #로그인한 유저의 스토어정보 & 업로드한 도서정보
         owner = BookStoreModel.objects.get(user_id=pk)
         books = BooksModel.objects.filter(user_id=pk)
-    #도서 업로드
+        
+        #도서 업로드
         if 'books_upload' in request.POST:
-            print('mystore.book.register')
-            if request.POST['is_rent'] == 'on':
+            # 체크박스 체크/해제 여부
+            is_rent = len(request.POST.getlist('is_rent'))
+            print(is_rent)
+            if is_rent == 1:
                 status = True
             else:
                 status = False
+
             add_book = BooksModel.objects.create(
                 updated_at = datetime.date.today(),
                 created_at = datetime.date.today(),
@@ -36,8 +40,16 @@ def mystore(request, pk):
             )
             #로그인한 유저의 마이스토어로 redirect
             return redirect('mystore', owner.user.pk)
-
-    #스토어에 데이터가 없는 경우(에러메시지+스토어등록)
+        
+        elif 'store_info_edit' in request.POST:
+            owner.store_name = request.POST['store_name']
+            owner.store_info = request.POST['store_info']
+            owner.store_img = request.POST['store_img']
+            owner.save()
+            
+            return redirect('mystore', owner.user.pk)
+            
+            #스토어에 데이터가 없는 경우(에러메시지+스토어등록)
     except BookStoreModel.DoesNotExist:
         if 'store_register' in request.POST:
             print('mystore.store.register')
@@ -66,6 +78,3 @@ def store(request, store_pk):
 
     return render(request, 'bookstore/store.html', {'store': store, 'books':books})
 
-def detail(request, book_pk):
-    book = BooksModel.objects.get(pk=book_pk)
-    return render(request, 'bookstore/detail.html', {'book':book})
