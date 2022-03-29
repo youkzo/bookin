@@ -4,6 +4,7 @@ from like.models import LikeModel
 from books.models import BooksModel
 from core.services import image_upload
 from users.models import UserModel
+import re
 
 
 def user_username_update(id, username):
@@ -16,11 +17,16 @@ def user_username_update(id, username):
     return
 
 
-def user_password_update(id, password):
-    user = get_user_model().objects.get(id=id)
-    user.set_password(password)
-    user.save()
-    return user
+def user_password_update(id, password, password2):
+
+    if password == password2:
+        user = get_user_model().objects.get(id=id)
+        user.set_password(password)
+        user.save()
+        return
+    else:
+        error = '잘못된 비밀번호입니다. 다시 확인해주세요.'
+        return error
 
 
 def upload_user_image(file, id):
