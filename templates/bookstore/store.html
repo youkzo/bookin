@@ -19,26 +19,30 @@
 
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
-    <!-- 스토어배경이미지 -->
+<!-- 스토어배경이미지 -->
+<img class="bg_img" src="{{store.store_img}}">
 
-    <img class="bg_img" src="{{store.store_img}}">
-
-    owner id : {{store.user.pk}}{{ user }}
-    owner-username : {{store.user.username}}
-    bookstore_id : {{ store.id }}
+owner id : {{store.user.pk}}{{ user }}
+owner-username : {{store.user.username}}
+bookstore_id : {{ store.id }}
 
 
-    <!-- 보유도서목록 -->
-    <div id="books_wrap">
-    {% for book in books%}
-        <div class="sales_book">
-            <img src="{{ book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
-            <div>
-                {{ book.book_name}}
-            </div>
+<!-- 보유도서목록 -->
+<div id="books_wrap">
+{% for book in books%}
+    <div class="sales_book">
+        <img src="{{ book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
+        <div>
+            <p>{{ book.book_name}}</p>
+            {% if book.is_rent == True%}
+                <p>대여가능</p>
+            {% else %}
+                <p>대여중</p>
+            {% endif %} 
         </div>
-    {% endfor %}
     </div>
+{% endfor %}
+</div>
 
 
 

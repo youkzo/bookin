@@ -4,16 +4,12 @@
 
 {#타이틀 넣는 곳#}
 {% block title %}
-    책이름
+{{book.book_name }}
 {% endblock %}
 
 {# css 파일 넣는 곳#}
 {% block css %}
     <link rel="stylesheet" href="{% static '/css/detail.css' %}">
-    <!-- 데이트피커 -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 {% endblock %}
 
 {#자바스크립트 파일 넣는 곳#}
@@ -25,19 +21,29 @@
 {% block content %}
 책디테일 페이지
     book pk: {{ book.pk }}title: {{book.book_name }} category: {{book.user_id }}
+<p>
+{% for b in buyer %}
+    {% for a in b.participants.all %}
+        {% if a.username != request.user.username %}
+        닉넴:{{ a.username }} id:{{ a.id }} 
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+</p>
+
+
 
 <div id="detail_wrap">
     <img src="{{ book.book_img }}">
-    
-    <div class="book_title">[{{book.book_name }}]</div>
-
-    
+    <div class="book_title">{{book.book_name }}</div>
     <div id="for_user">
         {% if book.is_rent == True %}
         <div id="onsale"><span>대여가능</span></div>
         {% else %}
         <div id="rented"><span>대여중</span></div>
         {% endif %}
+    
+<!-- 스토어 주인일 때만 도서수정팝업 버튼 보이기 -->
         {% if request.user.pk == book.user_id %}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square status-edit" value="status_edit_modal" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -45,60 +51,69 @@
             </svg>
         {% endif %}
     </div>
-    <!-- <div id="for_owner">
-        <span> On sale </span>
-                    <input id="sale_view" name="sale_status" type="checkbox" checked>
-    </div> -->
     <div class="book_info">가격: {{book.price }}</div>
     <div class="book_info">카테고리: {{book.category }}</div>
     <div class="book_info">평점: {{book.rating }}</div>
-    <div class="book_content"> {{book.content}} </div>
-<<<<<<< HEAD
+    <div class="book_info"> {{book.content}} </div>
+
+<!-- 스토어 주인이 아니면 채팅 버튼 보이기 -->
     {% if request.user.pk != book.user.id %}
         <a href="/chatting_room/{{ book.user.username }}">
             <div id="send_chat" onclick="goChat()"><span>CHAT</span></div>
         </a>
     {% endif %}
+    <div class="book_info">
+        {% for user in rentuser %}
+            <p>{{ user.user_rented.username }}님이 {{ user.exp_date }}까지 대여했습니다</p>
+        {% endfor %}
+    </div>
+</div>
 
 
 
 <!-- 도서상태수정팝업창 -->
-<dialog id="status_edit_modal"open>
+<dialog id="status_edit_modal">
     <form method="POST">
         {% csrf_token %}
         <div id="status_wrap">
-            <button class="btn">X</button>
-            <p>도서수정(버튼-팝업)</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x btn" value="status_edit_modal" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+            <p>도서등록 정보수정</p>
             <div>
-                책이름: <input name="book_name" value="{{book.book_name}}">
+                <p>책이름:</p>
+                <input name="book_name" value="{{book.book_name}}">
             </div>
             <div>
-                가격:<input type="text" name="price" value="{{book.price}}">
+                <p>가격:</p>
+                <input type="text" name="price" value="{{book.price}}">
             </div>
             <div> 
-                게시글:<input name="content" value="{{book.content}}">
+                <p>게시글:</p>
+                <input name="content" value="{{book.content}}">
             </div>
             <div>
-                평점:<select name="rating" id="select_rating">
+                <p>평점:</p>
+                <select name="rating" id="select_rating">
                     <option selected>{{book.rating}}</option>
                     {% for i in "12345" %}
                     <option value="{{i}}">{{i}}</option>
                     {% endfor %}
                 </select> 
-                <!-- 평점:<input name="rating" value="{{book.rating}}"> -->
             </div>
             <div> 
-                책이미지:<input name="book_img" value="{{book.book_img}}"">
+                <p>책이미지:</p>
+                <input name="book_img" value="{{book.book_img}}"">
             </div>
             <div> 
-                카테고리:<select name="category" id="select_category">
+                <p>카테고리:</p>
+                <select name="category" id="select_category">
                     <option selected>{{book.category}}</option>
                     <option value="소설">소설</option>
                     <option value="만화">만화</option>
                     <option value="잡지">잡지</option>
                     <option value="기타">기타</option>
                 </select>
-                <!-- 카테고리:<input name="category" value="{{book.category}}"> -->
             </div>
             <div>
                 <span id="cb_text"></span>
@@ -109,14 +124,18 @@
                 {% endif %}
             </div>
             <div>
-                <span><구매자>님이
+                구매자:
+                <select name="user_rented_id" id="buyer_info">
+                    {% for b in buyer %}
+                        {% for a in b.participants.all %}
+                            {% if a.username != request.user.username %}
+                            <option value="{{ a.id }}">{{ a.username }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </select>
                 <input type="date" name="returnday" placeholder="반납예정일">
-                <!-- <script>
-                    $(function () {
-                        $("#returnday").datepicker();
-                    });
-                </script> -->
-                까지 대여중</span>
+                <span>까지 대여중</span>
             </div>
 
         </div>
@@ -124,34 +143,6 @@
     </form>
 
 </dialog>
-
-
-
-
-
-<!-- <script>
-    
-    window.onload = function(){
-        var renton = "{{book.is_rent}}"
-        console.log(renton)
-        var checkTest = document.getElementById('test')
-        var boxcheck = document.getElementById('testcheck')
-        if ( renton == "True"){
-            checkTest.innerText= "대여가능"
-            boxcheck.checked = true;
-        } else {
-            checkTest.innerText= "대여중"
-            boxcheck.checked = false;
-        }
-        
-    }
-</script> -->
-=======
-    <a href="/chatting_room/{{ book.user.username }}">
-        <div id="send_chat" onclick="goChat()"><span>CHAT</span></div>
-    </a>
-</div>
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 
 
 {% endblock %}

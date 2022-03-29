@@ -1,7 +1,7 @@
 // 스토어등록&도서등록 모달팝업창
 
 $(function(){
-    $("#modal_popup").click(function(){
+    $(".modal_popup").click(function(){
         console.log('clicked')
         let pop_val = $(this).attr('value');
         console.log(pop_val)

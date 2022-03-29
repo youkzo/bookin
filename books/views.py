@@ -1,10 +1,10 @@
 import datetime
 from django.shortcuts import redirect, render
-import pkg_resources
 from books.models import BookRentByUser, BooksModel
 from django.utils.datastructures import MultiValueDictKeyError
 
 from bookstore.models import BookStoreModel
+from chat.models import ChatRoom
 
 
 def main(request):
@@ -14,6 +14,8 @@ def main(request):
 #스토어페이지에서 책 클릭하면 디테일 페이지로 이동
 def detail(request, book_pk):
     book = BooksModel.objects.get(pk=book_pk)
+    buyer = ChatRoom.objects.filter(participants=request.user.pk)
+    rentuser = BookRentByUser.objects.filter(book_id=book_pk)
 
     # 도서정보수정
     if 'status_edit' in request.POST:
@@ -24,7 +26,7 @@ def detail(request, book_pk):
         # except MultiValueDictKeyError:
         #     status = False
         
-        # 체크박스 체크/해제 여부
+        # 도서대여상태 체크박스 체크/해제 여부
         is_rent = len(request.POST.getlist('is_rent'))
         print(is_rent)
         if is_rent == 1:
@@ -42,14 +44,19 @@ def detail(request, book_pk):
         book.save()
 
         rented_info = BookRentByUser.objects.create(
-            updated_at = datetime.date.today(),
-            created_at = datetime.date.today(),
+            # updated_at = datetime.date.today(),
+            # created_at = datetime.date.today(),
             book_id = book.pk,
-            user_rented_id = book.user_id,
+            user_rented_id = request.POST['user_rented_id'],
             exp_date = request.POST['returnday'],
         )
         return redirect('detail', book.pk)
 
+    context = {
+        'book':book, 
+        'buyer':buyer, 
+        'rentuser':rentuser
+    }
 
-    return render(request, 'bookstore/detail.html', {'book':book})
+    return render(request, 'bookstore/detail.html', context)
 

@@ -31,13 +31,13 @@ $(document).ready(function(){
         if ($(this).prop('checked')){
             console.log(document.querySelector('#cb_text').value)
             $('#cb_text').empty();
-            $('#cb_text').text('대출가능');
+            $('#cb_text').text('대여가능');
             // $('#cb_status').val('1');
             // $('#cb_status').attr('value','1');
             
         } else {
             $('#cb_text').empty();
-            $('#cb_text').text('대출중');
+            $('#cb_text').text('대여중');
             // $('#cb_status').val('0');
         }
     });
