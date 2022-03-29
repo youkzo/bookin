@@ -1,37 +1,48 @@
-// 모달팝업창
-$(function(){
-    $("#store_register_btn").click(function(){
-        $(".modal").show();
-        console.log('hello');
-    })
-})
-$(function(){
+// 스토어등록&도서등록 모달팝업창
 
-        // .modal안에 button을 클릭하면 .modal닫기
-        $(".modal button").click(function(){
-            $("#store_register").hide();
-            location.reload();
-            console.log('reloaded')
-        });
+$(function(){
+    $(".modal_popup").click(function(){
+        console.log('clicked')
+        let pop_val = $(this).attr('value');
+        console.log(pop_val)
+        $('.'+pop_val).show();
     });
-
-
-// 도서등록 모달팝업창
-$(function(){
-    $("#book_upload_btn").click(function(){
-        $("._modal").show();
-        console.log('hello');
-    })
-})
-$(function(){
-
-        // .modal안에 button을 클릭하면 .modal닫기
-        $("._modal button").click(function(){
-            $("#upload_books").hide();
-            location.reload();
-            console.log('reloaded')
-        });
+    $(".btn").click(function(){
+        let close_val = $(this).attr('value');
+        console.log(close_val)
+        $('.'+close_val).hide();
+        location.reload();
+        console.log('reloaded');
     });
+});
 
 
 
+// 도서상태수정 팝업창 대여여부 체크박스
+$(document).ready(function(){
+    console.log('worked')
+    // 현재 대여여부 상태를 텍스트로 표기
+    if( $('#cb_status').prop('checked')){
+        $('#cb_text').text('대여가능');
+    } else {
+        $('#cb_text').text('대여중');
+    }
+    
+    $("#cb_status").click(function(){
+        console.log('체크박스클릭')
+        // 체크박스 클릭되어있으면 대여가능->대여중으로 변경
+        if ($(this).prop('checked')){
+            console.log(document.querySelector('#cb_text').value)
+            $('#cb_text').empty();
+            $('#cb_text').text('대여가능');
+            // $('#cb_status').val('1');
+            // $('#cb_status').attr('value','1');
+            
+        } else {
+            $('#cb_text').empty();
+            $('#cb_text').text('대여중');
+            // $('#cb_status').val('0');
+        }
+    });
+ 
+});

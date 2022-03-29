@@ -1,6 +1,7 @@
 .bg_img{
     width: 100vw;
     height: 45vh;
+    background-color: bisque;
 }
 #store_wrap {
     display: flex;
@@ -13,9 +14,24 @@
 }
 
 
-#store_register{
+#_store_register{
     border: 1px solid black;
     width: 500px;
+}
+.none_store {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 팝업버튼 */
+.modal_popup {
+    width: 150px;
+    background-color: powderblue;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #books_upload{

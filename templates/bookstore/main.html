@@ -59,14 +59,20 @@ stores
     <p class="decoration-sky-500">
         전체스토어
         request.user: {{ request.user.pk }}
+        
     </p>
 </div>
 <div class="store_wrap">
     {% for store in stores %}
         <div class="store_img">
-            <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.pk %}'">
-            <p>{{store.store_name}}</p>
+            {% if request.user.pk == store.user_id%}
+                <img src="{{store.store_img}}" onclick="location.href = '{% url 'mystore' store.user_id %}'">
+            {% else %}
+                <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.pk %}'">
+            {% endif %}
+                <p>{{store.store_name}}</p>
             store_id: {{store.pk}}
+            스토어주인id: {{ store.user_id }}
         </div>
     {% endfor %}
 </div>
