@@ -28,7 +28,7 @@
         if (me != user.talker){
             html = `<div class="mb-6 flex">
                         <img class="w-14 h-14 rounded-full" src="${user.talker_image}" alt="">
-                        <div class="mt-px p-5 max-w-[270px] mx-3 rounded bg-gray-200">
+                        <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">
                             ${message}
                         </div>
                         <span class="flex items-end font-light text-sm">${user.time}</span>
@@ -36,7 +36,7 @@
         }else{
             html = `<div class="mb-6 flex justify-end self-end text-right">
                         <span class="flex items-end font-light text-sm">${user.time}</span>
-                        <div class="mt-px p-5 max-w-[270px] mx-3 rounded bg-gray-200">
+                        <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">
                             ${message}
                         </div>
                     </div>`;
@@ -76,8 +76,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="w-full h-screen flex justify-center overflow-y-hidden">
-    <div class="container h-4/6 pt-16">
+<div class="w-full h-screen mt-20 flex justify-center overflow-y-hidden">
+    <div class="container h-4/6">
         <div id="messageBox" class="overflow-y-rev overflow-x-hidden h-full w-full">
             {% if room.messages.count == 0 %}
                 메세지가 없습니다
@@ -86,7 +86,7 @@
             {% if message.user.username == user.username %}
             <div class="mb-6 flex justify-end self-end text-right">
                 <span class="flex items-end font-light text-sm">{{message.created_at|time:"A h:i"}}</span>
-                <div class="mt-px p-5 max-w-[270px] mx-3 rounded bg-gray-200">
+                <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">
                     {{message.message}}
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 <div class="flex items-center">
                     <img class="w-14 h-14 rounded-full" src="{{ message.user.user_image }}" alt="">
                 </div>
-                <div class="mt-px p-5 max-w-[270px] mx-3 rounded bg-gray-200">
+                <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">
                     {{message.message}}
                 </div>
                 <span class="flex items-end font-light text-sm">{{message.created_at|time:"A h:i"}}</span>
@@ -107,8 +107,8 @@
         <div class="w-full pt-5">
             <form id="form">
                 <div class="w-full flex">
-                    <input type="text" id="input" oninput="messageInputChange(this)" class="w-full p-2 border-2 rounded ml-3" placeholder="메시지를 입력하세요" required>
-                    <button id="sendBtn" class="p-2 w-20 cursor-pointer disabled:text-gray-500 disabled:border-2 disabled:cursor-not-allowed" disabled>전송</button>
+                    <textarea type="text" id="input" oninput="messageInputChange(this)" class="w-full p-2 border-2 rounded ml-3" placeholder="메시지를 입력하세요" required></textarea>
+                    <button id="sendBtn" class="p-2 w-20 cursor-pointer rounded bg-blue-900 text-white disabled:bg-white disabled:text-gray-500 disabled:border-2 disabled:cursor-not-allowed" disabled>전송</button>
                 </div>
             </form>
         </div>
