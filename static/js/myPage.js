@@ -28,6 +28,7 @@ function passwordCanChangeBtn(e) {
   let password = document.getElementById("password");
   let password2 = document.getElementById("password2");
   let profileBtn = document.getElementById("profileBtn");
+  let passwordBtn = document.getElementById("passwordBtn");
 
   password.removeAttribute("disabled");
   password2.removeAttribute("disabled");

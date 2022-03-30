@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-{% load tz %}
 {% load static %}
 
 {% block title %}
@@ -53,9 +52,8 @@
     socket.emit('join', roomId)
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-
+        
         let data = new FormData()
-
         data.append('message',input.value)
         data.append('chat_room_id',roomId)
 
@@ -67,7 +65,6 @@
                 "X-CSRFToken": '{{csrf_token}}', 
             }
         }).then(res => {
-            console.log(res.data);
             socket.emit('sendMessage',{'message':input.value,'roomId':roomId,'user':{"talker":me,"talker_image":me_image,"time":res.data}})
         })
         .catch(errors => console.log(errors)) 
@@ -76,8 +73,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="w-full h-screen mt-20 flex justify-center overflow-y-hidden">
-    <div class="container h-4/6">
+<div class="w-full h-[80vh] mt-20 flex justify-center overflow-y-hidden">
+    <div class="container h-5/6">
         <div id="messageBox" class="overflow-y-rev overflow-x-hidden h-full w-full">
             {% if room.messages.count == 0 %}
                 메세지가 없습니다
@@ -105,10 +102,10 @@
             {% endif %}
         </div>
         <div class="w-full pt-5">
-            <form id="form">
+            <form id="form" name="form">
                 <div class="w-full flex">
-                    <textarea type="text" id="input" oninput="messageInputChange(this)" class="w-full p-2 border-2 rounded ml-3" placeholder="메시지를 입력하세요" required></textarea>
-                    <button id="sendBtn" class="p-2 w-20 cursor-pointer rounded bg-blue-900 text-white disabled:bg-white disabled:text-gray-500 disabled:border-2 disabled:cursor-not-allowed" disabled>전송</button>
+                    <textarea type="text" id="input" onKeyPress="sendPress(event)" oninput="messageInputChange(this)" class="w-full p-2 border-2 rounded ml-3" placeholder="메시지를 입력하세요" style="resize:none" required></textarea>
+                    <button id="sendBtn" type="submit" class="p-2 w-20 mr-3 cursor-pointer rounded bg-blue-900 text-white disabled:bg-white disabled:text-gray-500 disabled:border-2 disabled:cursor-not-allowed" disabled>전송</button>
                 </div>
             </form>
         </div>
