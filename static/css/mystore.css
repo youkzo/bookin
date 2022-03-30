@@ -11,27 +11,31 @@
 #store_info {
     display: flex;
     justify-content: center;
+    height: 50px;
+    align-items: center;
+}
+#store_info p {
+    font-size: 20px;
+    font-weight: bolder;
+    margin-right: 20px;
 }
 
-
-#_store_register{
-    border: 1px solid black;
-    width: 500px;
-}
 .none_store {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* 팝업버튼 */
-.modal_popup {
-    width: 150px;
+/* 도서등록팝업 */
+.book_upload_btn {
+    width: 100px;
     background-color: powderblue;
     text-align: center;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 20px;
+    padding: 2px;
 }
 
 #books_upload{
@@ -49,6 +53,238 @@
     margin: 2%;
 }
 
+#uploaed_book {
+    margin: 2%;
+    width: 250px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #uploaed_book img {
-    width: 20vw;
+    width: 100%;
+    height: 350px;
+}
+
+#uploaed_book p {
+    margin: 2%;
+    text-align: center;
+}
+
+#onsale {
+    margin: 7% 0 3% 0;
+    text-align: center;
+    width: 100px;
+    background-color: powderblue;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#rented {
+    margin: 7% 0 3% 0;
+    text-align: center;
+    width: 100px;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+
+/* 스토어정보수정팝업 */
+.storeinfo_edit {
+    top: 20vh;
+    height: 500px;
+    background-color: transparent;
+}
+form.storeinfo_form {
+    height: 500px;
+    width: 400px;
+    padding: 3%;
+    border-radius: 10px;
+    margin-top: 5px;
+    background-color: white;
+}
+div#edit_wrap {
+    display: flex;
+    flex-direction: column;
+}
+.bg_edit {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}
+.bg_edit p {
+    width: 130px;
+    margin-left: 20px;
+}
+.bg_edit input {
+    margin: auto;
+    padding: 5px;
+    outline-color: beige;
+}
+textarea.edit_input {
+    margin: auto;
+    height: 90px;
+    margin-top: 20px;
+    outline-color: beige;
+    padding: 5px;
+}
+#store_edit_btn {
+    margin: 120px auto;
+    background-color: powderblue;
+    width: 100px;
+    border-radius: 5px;
+    padding: 2px;
+    font-weight: bold;
+}
+#store_edit_title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px;
+}
+svg.bi.bi-x-circle.btn {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+
+
+/* 도서등록수정팝업 */
+
+.book_upload {
+    top: 20vh;
+    height: 500px;
+    background-color: transparent;
+}
+#books_upload {
+    height: 570px;
+    width: 400px;
+    padding: 3%;
+    border-radius: 10px;
+    margin-top: 5px;
+    background-color: white;
+}
+div#edit_wrap {
+    display: flex;
+    flex-direction: column;
+}
+.books_edit {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+.books_edit p {
+    width: 100px;
+    margin-left: 20px;
+}
+.books_edit input {
+    margin: auto;
+    padding: 5px;
+    outline: none;
+    border-bottom: 5px darkgray dotted;
+}
+
+#books_edit_btn {
+    margin: 40px auto 0 130px;
+    background-color: powderblue;
+    width: 100px;
+    border-radius: 5px;
+    padding: 2px;
+    font-weight: bold;
+}
+#books_edit_title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px;
+}
+svg.bi.bi-x-circle.btn {
+    margin-left: auto;
+    cursor: pointer;
+}
+#cb_text {
+    padding: 30px;
+}
+#select_rating {
+    margin: AUTO;
+    outline: none;
+}
+#select_category {
+    margin: AUTO;
+    outline: none;
+}
+
+
+/* 스토어등록팝업 */
+#store_register_btn {
+    background-color: powderblue;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 20px;
+    cursor: pointer;
+}
+.error_msg{
+    margin: 20px;
+    font-size: 20px;
+    color: #ff861e;
+    font-weight: bolder;
+    text-align: center;
+}
+
+
+.store_register {
+    top: 20vh;
+    height: 500px;
+    background-color: transparent;
+}
+#_store_register{
+    height: 480px;
+    width: 400px;
+    padding: 3%;
+    border-radius: 10px;
+    margin-top: 5px;
+    background-color: white;
+    border: 1px dotted darkgray;
+}
+#register_wrap {
+    display: flex;
+    flex-direction: column;
+}
+.store_regi {
+    display: flex;
+    height: 50px;
+    align-items: center;
+}
+.store_regi p {
+    width: 100px;
+    margin-left: 20px;
+}
+.store_regi input {
+    margin: auto;
+    padding: 5px;
+    outline: none;
+    border-bottom: 5px darkgray dotted;
+}
+
+#register_btn {
+    margin: 150px auto 0 130px;
+    background-color: powderblue;
+    width: 100px;
+    border-radius: 5px;
+    padding: 2px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#register_title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 25px;
+}
+svg.bi.bi-x-circle.btn {
+    margin-left: auto;
+    cursor: pointer;
 }

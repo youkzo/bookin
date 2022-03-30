@@ -34,10 +34,11 @@
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
 
-메인슬릭(예시)
-    <div class="main_top">       
-            <img  src="{% static '/img/main_1.jpg' %}">  
-            <img  src="{% static '/img/main_2.jpg' %}">    
+
+    <div class="main_top">
+            <img  src="{% static '/img/main4.jpg' %}">
+            <img  src="{% static '/img/main3.jpg' %}">3         
+            <!-- <img  src="{% static '/img/main_2.jpg' %}">     -->
     </div>
     <!-- 실제데이터 들어오는 곳(추후수정) -->
     <!-- <div id="main_top">
@@ -53,7 +54,7 @@
 
 
 
-stores
+<!-- stores
 
 <div>
     <p class="decoration-sky-500">
@@ -61,7 +62,9 @@ stores
         request.user: {{ request.user.pk }}
         
     </p>
-</div>
+</div> -->
+
+
 <div class="store_wrap">
     {% for store in stores %}
         <div class="store_img">
@@ -71,8 +74,8 @@ stores
                 <img src="{{store.store_img}}" onclick="location.href = '{% url 'store' store.pk %}'">
             {% endif %}
                 <p>{{store.store_name}}</p>
-            store_id: {{store.pk}}
-            스토어주인id: {{ store.user_id }}
+            <!-- store_id: {{store.pk}}
+            스토어주인id: {{ store.user_id }} -->
         </div>
     {% endfor %}
 </div>

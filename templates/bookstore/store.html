@@ -22,13 +22,13 @@
 <!-- 스토어배경이미지 -->
 <img class="bg_img" src="{{store.store_img}}">
 
-owner id : {{store.user.pk}}{{ user }}
+<!-- owner id : {{store.user.pk}}{{ user }}
 owner-username : {{store.user.username}}
-bookstore_id : {{ store.id }}
+bookstore_id : {{ store.id }} -->
 
 
 <!-- 보유도서목록 -->
-<div id="books_wrap">
+<!-- <div id="books_wrap">
 {% for book in books%}
     <div class="sales_book">
         <img src="{{ book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
@@ -42,9 +42,25 @@ bookstore_id : {{ store.id }}
         </div>
     </div>
 {% endfor %}
-</div>
+</div> -->
 
 
+    <div id="uploaed_book_wrap">
+            {% for book in books %}
+                <div id="uploaed_book">
+                    <img src="{{book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
+                    {% if book.is_rent == True%}
+                        <div id="onsale">대여가능</div>
+                    {% else %}
+                        <div id="rented">대여중</div>
+                    {% endif %}
+                    <p>{{book.book_name}}</p>    
+                </div>    
+            {% endfor %}
+    </div>
+
+ 
+ 
 
     
 {% endblock %}
