@@ -19,7 +19,6 @@ def chatting_room(request, username):
         user = request.user.is_authenticated
         if user:
             my_room = go_chat_room(request.user.id, username)
-            print(my_room.messages.all()[0: 20])
             return render(request, "chat/chattingRoom.html", {'room': my_room})
         else:
             return redirect('/')

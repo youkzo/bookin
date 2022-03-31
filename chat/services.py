@@ -30,4 +30,6 @@ def create_message(user, chat_room_id, message):
     current_chat_room = ChatRoom.objects.filter(id=chat_room_id).get()
     message = Message.objects.create(
         user=user, chat_room=current_chat_room, message=message)
+    current_chat_room.updated_at = datetime.datetime.now()
+    current_chat_room.save()
     return datetime.datetime.now()
