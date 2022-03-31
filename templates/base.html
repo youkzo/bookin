@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %} | Bookin</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <link href="/static/img/favicon1.PNG" rel="shortcut icon" type="image/x-icon">
+    <link href="/static/img/favicon.PNG" rel="shortcut icon" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shizuru&display=swap" >
@@ -35,29 +35,30 @@
             <input name="search" placeholder="   search...">
         </div>
         {% if not user.is_authenticated %}
-        <div id="menu_signin">
+        <div id="menu_items">
             <a href="/sign-in"><img src="{% static '/img/signin.png' %}"></a>
         </div>
-        <div id="menu_signup">
+        <div id="menu_items">
             <a href="/sign-up"><img src="{% static '/img/signup.png' %}"></a>
         </div>
         {% else%}
-        <div id="mymenu">
-            <img id="menu_items" onclick="dropdown();" src="{% static '/img/mypage.png' %}">
+        <div id="menu_items">
+            <img onclick="dropdown();" src="{% static '/img/mypage.png' %}">
             <div id="dropmenu" class="drop">
                 <div onclick="location.href='/my-page'">Hello! {{user.username}}</div>
-                <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">mystore</div>    
+                <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">My책방</div>    
             </div>
         </div>
-        <div id="logout"><a href="/logout"><img  src="{% static '/img/logout.png' %}"></a></div>
+        <div id="menu_items"><a href="/logout"><img  src="{% static '/img/logout.png' %}"></a></div>
         {% endif %}
         
         
     </nav>
     
-
+<div id="content_wrap">
 {% block content %}
 {% endblock %}
+</div>
 
 {% block js %}
 {% endblock %}

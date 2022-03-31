@@ -5,17 +5,30 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
 
 #menu_container {
     display: flex;
-    height: 70px;
+    height: 80px;
     justify-content: flex-start;
-    padding: 0 20px;
+    padding: 0px 30px 0 20px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    width: 100vw;
+    box-shadow: 14px -7px 14px 0px #061568b8;
 }
-#menu_container div {
-    margin-left: 10px;
+
+#content_wrap {
+    margin-top: 80px;
+}
+
+
+#menu_items {
+    width: 50px;
+    margin-left: 2%;
+    margin-top: 10px;
 }
 
 #menu_logo {
-    width: 200px;
-    margin: 20px 100px 10px 10px;
+    width: 220px;
+    margin: 22px 100px 10px 5px;
 }
 #mymenu {
     margin-left: auto;
@@ -31,16 +44,6 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
     border-bottom-width: thick;
     outline: none;
 }
-#menu_signin{width: 60px;}
-#menu_signup{width: 60px;}
-
-#menu_sign > img {
-    width: 60px;
-}
-#menu_items{
-    width: 60px;
-}
-#logout{width: 60px;}
 
 
 .drop{display: none;}
@@ -48,16 +51,16 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
 
 #dropmenu {
     position: absolute;
-    font-size: 15px;
-    background-color: #c5c4c4cc;
+    font-size: 20px;
+    background-color: #edededd4;
     border: none;
     border-radius: 12px;
     padding: 10px;
     right: 0px;
-    width: 120px;
+    width: 150px;
     text-align: center;
     z-index: 1;
     margin-top: 10px;
-    margin-right: 30px;
+    margin-right: 65px;
     cursor: pointer;
 }

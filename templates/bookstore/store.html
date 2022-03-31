@@ -21,6 +21,8 @@
 {% block content %}
 <!-- 스토어배경이미지 -->
 <img class="bg_img" src="{{store.store_img}}">
+<p id="store_name">{{store.user.username}}님의 책방</p>
+<div id="store_info">{{ store.store_info }}</div>
 
 <!-- owner id : {{store.user.pk}}{{ user }}
 owner-username : {{store.user.username}}

@@ -8,7 +8,18 @@
     height: 45vh;
     background-color: bisque;
 }
-
+#store_name {
+    margin: 10px auto;
+    width: 200px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+#store_info {
+    font-size: 17px;
+    margin: 20px auto;
+    width: 700px;
+}
 #books_wrap{
     display: flex;
 }
