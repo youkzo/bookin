@@ -30,9 +30,7 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
     width: 220px;
     margin: 22px 100px 10px 5px;
 }
-#mymenu {
-    margin-left: auto;
-}
+
 #menu_search {
     margin: auto;
     width: 360px;
@@ -44,7 +42,6 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
     border-bottom-width: thick;
     outline: none;
 }
-
 
 .drop{display: none;}
 .active {display: block;}
