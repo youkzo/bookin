@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('.well-known/pki-validation/', views.validation, name='pki-validation'),
-    path('.well-known/', views.validation, name='validation'),
+    path('.well-known/pki-validation/<str:filename>',
+         views.validation, name='pki-validation'),
+    path('.well-known/<str:filename>', views.validation, name='validation'),
 ]
