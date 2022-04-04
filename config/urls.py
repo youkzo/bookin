@@ -23,6 +23,5 @@ urlpatterns = [
     path('', include('books.urls')),
     path('', include('chat.urls')),
     path('', include('search.urls')),
-    path('', include('core.urls')),
     path('bookstore/', include('bookstore.urls')),
 ]
