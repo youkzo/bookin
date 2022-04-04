@@ -1,0 +1,63 @@
+/* 구글폰트 */
+body, h1, h2, h3, h4, h5, h6, p, span,div {
+    font-family: 'Nanum Gothic Coding'!important;
+  }
+
+#menu_container {
+    display: flex;
+    height: 80px;
+    justify-content: flex-start;
+    padding: 0px 30px 0 20px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    width: 100vw;
+    box-shadow: 14px -7px 14px 0px #061568b8;
+}
+
+#content_wrap {
+    margin-top: 80px;
+}
+
+
+#menu_items {
+    width: 50px;
+    margin-left: 2%;
+    margin-top: 10px;
+}
+
+#menu_logo {
+    width: 220px;
+    margin: 22px 100px 10px 5px;
+}
+
+#menu_search {
+    margin: auto;
+    width: 360px;
+    height: 35px;
+}
+#menu_search input {
+    width: 100%;
+    height: 100%;
+    border-bottom-width: thick;
+    outline: none;
+}
+
+.drop{display: none;}
+.active {display: block;}
+
+#dropmenu {
+    position: absolute;
+    font-size: 20px;
+    background-color: #edededd4;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    right: 0px;
+    width: 150px;
+    text-align: center;
+    z-index: 1;
+    margin-top: 10px;
+    margin-right: 65px;
+    cursor: pointer;
+}

@@ -8,7 +8,18 @@
     height: 45vh;
     background-color: bisque;
 }
-
+#store_name {
+    margin: 10px auto;
+    width: 200px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+#store_info {
+    font-size: 17px;
+    margin: 20px auto;
+    width: 700px;
+}
 #books_wrap{
     display: flex;
 }
@@ -32,26 +43,47 @@
 
 }
 
-/* 도서목록리스트 */
-.selling_book {
+
+#uploaed_book_wrap{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-left: 120px;
+}
+
+#uploaed_book {
+    margin: 2%;
+    width: 250px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
-.selling_book_img {
+
+#uploaed_book img {
+    width: 100%;
+    height: 350px;
+}
+
+#uploaed_book p {
+    margin: 2%;
+    text-align: center;
+}
+
+#onsale {
+    margin: 7% 0 3% 0;
+    text-align: center;
     width: 100px;
+    background-color: powderblue;
+    border-radius: 5px;
+    padding: 2px;
 }
 
-
-/* 도서업로드 */
-dialog#upload_books {
-    border: 1px solid gray;
-    border-radius: 10px;
-    top: 100px;
-    width: 500px;
-    height: 650px;
-}
-
-#upload_wrap{
-    border: none;
+#rented {
+    margin: 7% 0 3% 0;
+    text-align: center;
+    width: 100px;
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 2px;
 }

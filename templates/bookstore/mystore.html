@@ -4,7 +4,7 @@
 
 {#타이틀 넣는 곳#}
 {% block title %}
-    {{owner.username}}의 스토어
+    {{owner.user.username}}님의 책방
 {% endblock %}
 
 {# css 파일 넣는 곳#}
@@ -19,90 +19,73 @@
 
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
-    마이스토어:user.pk {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
-    owner.pk: {{ owner.pk }}
+
+    <!-- 마이스토어:user.pk {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
+    store_pk : {{ owner.pk }} -->
+
+<!-- 스토어등록되어있는지 확인 -->
+<!-- 스토어 등록되어있으면 정보 불러오기 -->
     {% if owner %}
         <img class="bg_img" src="{{owner.store_img}}">
         <div id="store_wrap">
             <div id="store_info">
-                <p>{{owner.user.username}}님의 스토어</p>
-                <svg style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gear settings" viewBox="0 0 16 16">
+                <p>{{owner.user.username}}님의 책방</p>
+                <svg class="modal_popup" value="storeinfo_edit" style="cursor:pointer" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gear settings" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
                     <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
                 </svg>
             </div>
             <div>
                 {{ owner.store_info }}
-                store_pk : {{ owner.pk }}
             </div>
+            <!-- 스토어가 등록되어있을 때 도서 등록하기     -->
+            {% if owner %}
+            <button class="modal_popup book_upload_btn" value="book_upload">도서등록</button>
+            {% else %}
+            <p class="error_msg">스토어를 먼저 등록해 주세요</p>
+            {% endif %}
         </div>
+<!-- 스토어정보 없을 때 에러메시지 & 등록하기버튼         -->
     {% else %}
-        {{ error }}
-    <div id="store_register_btn">스토어등록하기</div>
-    <dialog class="modal">
-        <button>X</button>
-        <div id="store_register">
+    <img class="bg_img" src="/static/img/store_none.jpg">
+    <div class="none_store">
+        <div class="error_msg">{{ error }}</div>
+        <div id="store_register_btn" class="modal_popup" value="store_register">책방 등록하기</div>
+    </div>
+
+<!-- 스토어등록팝업 -->
+    <dialog class="store_register">
+        <!-- <button class="btn" value="store_register">X</button> -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle btn" value="store_register" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+        <div id="_store_register">
             <form action="/bookstoremymystore/{{store.pk}}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div id="upload_book">
-                    <p>스토어등록</p>
-                    <div>
-                        스토어이름:<input name="store_name">
+                <div id="register_wrap">
+                    <p id="register_title">내 책방 등록</p>
+                    <div class="store_regi">
+                        <p>책방이름</p>
+                        <input name="store_name">
                     </div>
-                    <div>
-                        스토어소개:<input name="store_info">
+                    <div class="store_regi">
+                        <p>책방소개</p>
+                        <input name="store_info">
                     </div>
-                    <div> 
-                        대표이미지:<input name="store_img" placeholder="이미지주소">
+                    <div class="store_regi"> 
+                        <p>책방이미지</p>
+                        <input name="store_img">
                     </div>
-                    <div> 
-                        조회수<input name="store_views">
-                    </div>
+                    <button id="register_btn" type="submit" name="store_register">책방등록</button>
                 </div>
-                <button type="submit" name="store_register">스토어등록</button>
+                
             </form>
         </div>
     </dialog>
     {% endif %}
 
-    {% if owner %}
-    <div id="book_upload_btn">도서등록하기</div>
-    <dialog class="_modal">
-    <button>X</button>
-    <div id="books_upload">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div id="upload_book">
-                <p>도서등록(버튼-팝업)</p>
-                <div>
-                    책이름:<input name="book_name">
-                </div>
-                <div>
-                    가격:<input name="price">
-                </div>
-                <div> 
-                    게시글:<input name="content">
-                </div>
-                <div> 
-                    평점:<input name="rating">
-                </div>
-                <div> 
-                    책이미지:<input name="book_img">
-                </div>
-                <div> 
-                    카테고리:<input name="category">
-                </div>
-                <div> 
-                    대여여부:<input type="checkbox" name="is_rent" checked>
-                </div>
-            </div>
-            <button type="submit" name="books_upload">도서등록</button>
-        </form>
-    </div>
-    </dialog>
-    {% else %}
-        <p>스토어를 먼저 등록해 주세요</p>
-    {% endif %}
+
 
 <!-- 업로드한 도서 리스트 -->
     {% if books %}
@@ -110,18 +93,117 @@
             {% for book in books %}
                 <div id="uploaed_book">
                     <img src="{{book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
-                    <p>{{book.book_name}}</p>
                     {% if book.is_rent == True%}
-                        <p>On sale</p>
+                        <div id="onsale">대여가능</div>
                     {% else %}
-                        <p>Not sale</p>
-                    {% endif %}    
+                        <div id="rented">대여중</div>
+                    {% endif %}
+                    <p>{{book.book_name}}</p>    
                 </div>    
             {% endfor %}
         </div>
     {% else %}
-        <p>등록된 도서가 없습니다</p>
+        <div class="error_msg">등록된 도서가 없습니다</div>
     {% endif %}
 
+   
     
+<!-- 도서등록 팝업창 -->
+<dialog class="book_upload">
+    <!-- <button class="btn" value="book_upload">X</button> -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle btn" value="book_upload" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+    </svg>
+    <div id="books_upload">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="upload_book">
+                <div id="books_edit_title">도서등록</div>
+                <div class="books_edit">
+                    <p>책이름</p>
+                    <input name="book_name">
+                </div>
+                <div class="books_edit">
+                    <p>가격</p>
+                    <input name="price">
+                </div>
+                <div class="books_edit"> 
+                    <p>책소개</p>
+                    <input name="content">
+                </div>
+                <div class="books_edit"> 
+                    <p>평점</p>
+                    <!-- <input name="rating"> -->
+                    <select name="rating" id="select_rating">
+                        <option selected>평점선택</option>
+                        {% for i in "12345" %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select> 
+                </div>
+                <div class="books_edit"> 
+                    <p>책이미지</p>
+                    <input name="book_img">
+                </div>
+                <div class="books_edit"> 
+                    <p>카테고리</p>
+                    <!-- <input name="category"> -->
+                    <select name="category" id="select_category">
+                        <option selected>카테고리선택</option>
+                        <option value="소설">소설</option>
+                        <option value="만화">만화</option>
+                        <option value="잡지">잡지</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <div class="books_edit"> 
+                    <p>대여여부</p>
+                    <span id="cb_text"></span>
+                    <input id="cb_status" type="checkbox" name="is_rent" checked>
+                </div>
+                <button id="books_edit_btn" type="submit" name="books_upload">도서등록</button>
+            </div>
+            
+        </form>
+    </div>
+</dialog>    
+
+
+<!-- 스토어정보세팅팝업창 -->
+    <dialog class="storeinfo_edit">
+
+        <!-- <button class="btn" value="storeinfo_edit">X</button> -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle btn" value="storeinfo_edit" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+        <form class="storeinfo_form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="edit_wrap">
+            <div id="store_edit_title">내 책방 정보수정</div>
+            <!-- 스토어배경이미지 -->
+            <div class="bg_edit">
+                <p class="pop_p">책방이미지편집</p>
+                <input class="edit_input"  name="store_img" value="{{ owner.store_img }}">
+            </div>
+            <!-- 스토어이름변경 -->
+            <div class="bg_edit">
+                <p class="pop_p">책방이름변경</p>
+                <input class="edit_input"  name="store_name" value="{{ owner.store_name }}">
+             </div>
+             <div class="bg_edit">
+                <p>책방소개변경</p>
+                <!-- <input class="edit_input"  name="store_info" value="{{ owner.store_info }}"> -->
+                <textarea class="edit_input"  name="store_info">{{ owner.store_info }}</textarea>
+             </div>
+             <button id="store_edit_btn" type="submit" name="store_info_edit">수정하기</button>
+
+        </div>
+            
+        </form>
+    </dialog>
+
+
+
 {% endblock %}

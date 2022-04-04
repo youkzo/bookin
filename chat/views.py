@@ -27,4 +27,4 @@ def chatting_room(request, username):
         message = request.POST.get('message', '')
         chat_room_id = request.POST.get('chat_room_id', '')
         result = create_message(user, chat_room_id, message)
-        return HttpResponse(result)
+        return HttpResponse(result.strftime("%p %I:%M "))

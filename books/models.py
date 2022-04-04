@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.models import BaseModel
+from typing import List, Any
 
 
 class BooksModel(BaseModel):
@@ -19,6 +20,8 @@ class BooksModel(BaseModel):
     category = models.CharField(max_length=255)
     book_views = models.IntegerField(default=0)
     is_rent = models.BooleanField(default=False)
+    like_count = models.IntegerField(default=0)
+    my_likes: List[Any]
 
     def __str__(self):
         return self.book_name
@@ -29,3 +32,4 @@ class BookRentByUser(BaseModel):
         "users.UserModel", related_name="rent", on_delete=models.CASCADE)
     book = models.ForeignKey(
         "BooksModel", related_name="rent", on_delete=models.CASCADE)
+    exp_date = models.DateField(null=True)
