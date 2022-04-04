@@ -2,52 +2,85 @@
 
 {% load static %}
 
-
 {% block title %}
-프로필
+  프로필
 {% endblock %}
-
 
 {% block js %}
-<script src="{% static 'js/myPage.js' %}"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) { 
-        const message = '{{ message }}'
-        if (message){
-            Eggy({
-                title: '유저네임이 변경되지 않았습니다',
-                message: message,
-                type: 'error',
-            });
-        }
+  <script src="{% static 'js/myPage.js' %}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      let currentImage = document.getElementById("currentImage");
+      currentImage.src = "{{ user.user_image }}"+"?time="+new Date().getTime();
+      const message = '{{ message }}';
+      if (message) {
+        Eggy({title: '유저네임이 변경되지 않았습니다', message: message, type: 'error'});
+      }
     });
-</script>
-{% endblock %}
 
+    function onUsernameChange(e) {
+      const myUsername = '{{ user.username }}';
+      let profileBtn = document.getElementById("profileBtn");
+      let password = document.getElementById("password");
+      if (myUsername != e.value) {
+        profileBtn.removeAttribute("disabled");
+      } else {
+        if (password.hasAttribute("disabled")) {
+          profileBtn.setAttribute("disabled", "");
+        }
+      }
+    }
+  </script>
+{% endblock %}
 
 {% block content %}
-<div>
-    <div>
-        <form action="{% url 'upload-user-image' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" id="file" name="file" accept="image/*">
-            <button>변경하기</button>
-        </form>
-        <img id="user-img" class="bg-cover bg-center w-80 h-96" src="#" alt="">
+  <div class="w-full flex flex-col justify-center items-center">
+    <div class="py-10">
+      <form action="{% url 'upload-user-image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'users/userImageCheckModal.html' %}
+        <label for="file">
+          <img id="currentImage" src="#" alt="" class="w-52 h-52 rounded-full border-2 object-center object-cover cursor-pointer">
+          <input type="file" id="file" name="file" accept="image/*" class="hidden">
+        </label>
+      </form>
     </div>
-    <div>
-        <form action="{% url 'my-page' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name='username' placeholder='유저네임' value="{{ user.username }}"required>
+    <div class="flex flex-col justify-center items-center">
+      <form action="{% url 'my-page' %}" method="post">
+        {% csrf_token %}
+        <div>
+          <label for="email-address" class="block text-sm font-medium text-gray-700">이름</label>
+          <input id="usernameInput" oninput="onUsernameChange(this)" name="username" value="{{ user.username }}" required="required" type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이름">
+        </div>
+
+        <div class="">
+          <div class="flex flex-col">
             <div>
-                <input type="password" id="password" name='password' pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" placeholder='비밀번호' disabled>
-                <input type="password" id="password2" name='password2' placeholder='비밀번호 확인' disabled>
-                <div onclick="passwordCanChangeBtn(this)" class="cursor-pointer">비밀번호 변경</div>
+              <label class="block text-sm font-medium text-gray-700">비밀번호</label>
+              <input id="password" name="password" onmousedown="checkInvalidPassword()" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" type="password" disabled="disabled" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
+
             </div>
-            <button>변경하기</button>
+            <div>
+              <label for="email-address" class="block text-sm font-medium text-gray-700">비밀번호 확인</label>
+              <input id="password2" name="password2" type="password" disabled="disabled" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호 확인">
+            </div>
+          </div>
+          <div class="flex justify-center items-start w-40 mt-10"></div>
+        </div>
+        {% if error %}
+          <div class="flex items-center justify-center mb-2 " role="alert">
+            <p class="text-red-600">
+              {{ error }}
+            </p>
+          </div>
+        {% endif %}
+        <div>
+          <div class="w-full flex justify-center items-center">
+            <button id="passwordBtn" onclick="passwordCanChangeBtn(this)" class="mt-6 mr-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border">비밀번호 변경</button>
+            <button type="submit" id="profileBtn" class="mt-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border" disabled="disabled">변경하기</button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-
-{% endblock %}
+  {% endblock %}

@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %} | Bookin</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <!-- <link href="/static/img/파비콘.PNG" rel="shortcut icon" type="image/x-icon"> -->
+    <link href="/static/img/favicon.PNG" rel="shortcut icon" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shizuru&display=swap" >
@@ -15,43 +15,52 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://bookin-bucket.s3.ap-northeast-2.amazonaws.com/static/eggy.js"></script>
-    
+    <link rel="stylesheet" href="/static/css/base.css">
+    <script type="text/javascript" src="/static/js/base.js"></script>
+    <!-- 구글폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     {% block css %}
     {% endblock %}
 
 
 </head>
 <body>
-    <nav id="menu_container" class="grid grid-cols-[150px_1fr_150px_150px]">
+    <nav id="menu_container">
         <div id="menu_logo">
-            <a href="/"><img src="{% static '/img/logo.jpg' %}"></a>
+            <a href="/"><img src="{% static '/img/bookin_logo.png' %}"></a>
         </div>
         <div id="menu_search">
-            <input name="search" placeholder="search...">
+            <input name="search" placeholder="   search...">
         </div>
         {% if not user.is_authenticated %}
-        <div id="menu_sign" class="grid grid-cols-[50px_50px]">
-            <a href="/sign-in"><p>login</p></a>
-            <a href="/sign-up"><p>signup</p></a>
+        <div id="menu_items">
+            <a href="/sign-in"><img src="{% static '/img/signin.png' %}"></a>
+        </div>
+        <div id="menu_items">
+            <a href="/sign-up"><img src="{% static '/img/signup.png' %}"></a>
         </div>
         {% else%}
-        <div>
-            <a href="/my-page"><p>Hello! {{user.username}}</p></a>    
-            <a href="/logout"><p>logout</p></a>
+        <div id="menu_items">
+            <img onclick="dropdown();" src="{% static '/img/mypage.png' %}">
+            <div id="dropmenu" class="drop">
+                <div onclick="location.href='/my-page'">Hello! {{user.username}}</div>
+                <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">My책방</div>    
+            </div>
         </div>
-        <div id="menu_mystore">
-            <p onclick="location.href = '{% url 'mystore' request.user.pk %}'">mystore</p>
-        </div>
+        <div id="menu_items"><a href="/logout"><img  src="{% static '/img/logout.png' %}"></a></div>
         {% endif %}
         
         
     </nav>
     
+    <div id="content_wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
 
-{% block content %}
-{% endblock %}
-
-{% block js %}
-{% endblock %}
+    {% block js %}
+    {% endblock %}
 </body>
 </html>

@@ -71,15 +71,20 @@ def my_profile_page(request):
     elif request.method == 'POST':
         message = ''
         username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
+        password = request.POST.get('password')
+        password2 = request.POST.get('password2')
 
-        if username != "" and username != request.user.username:
-            message = user_username_update(request.user.id, username)
+        if username != "":
+            user_message = user_username_update(request.user.id, username)
+        if user_message:
+            return render(request, 'users/profile.html', {'message': user_message})
         if password:
-            user_password_update(request.user.id, password)
-
-        if message:
-            return render(request, 'users/profile.html', {'message': message})
+            pw_message = user_password_update(
+                request.user.id, password, password2)
+        else:
+            return redirect("/my-page")
+        if pw_message:
+            return render(request, 'users/profile.html', {'error': pw_message})
         return redirect("/my-page")
 
 

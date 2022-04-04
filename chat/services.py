@@ -1,3 +1,5 @@
+import datetime
+
 from users.models import UserModel
 
 from .models import ChatRoom, Message
@@ -19,7 +21,8 @@ def go_chat_room(store_user_id, request_user_username):
 def my_chat_rooms_load(store_user_id):
     user = UserModel.objects.filter(id=store_user_id).get()
     if user is not None:
-        chatRooms = ChatRoom.objects.filter(participants=user)
+        chatRooms = ChatRoom.objects.filter(
+            participants=user).order_by("-updated_at")
         return chatRooms
 
 
@@ -27,4 +30,6 @@ def create_message(user, chat_room_id, message):
     current_chat_room = ChatRoom.objects.filter(id=chat_room_id).get()
     message = Message.objects.create(
         user=user, chat_room=current_chat_room, message=message)
-    return message
+    current_chat_room.updated_at = datetime.datetime.now()
+    current_chat_room.save()
+    return datetime.datetime.now()

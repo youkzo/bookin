@@ -1,3 +1,8 @@
+.main_top {
+    position: relative;
+    z-index: -100;
+}
+
 .main_top img{
     width: 100vw;
     height: 45vh;
@@ -5,16 +10,23 @@
 
 
 .store_img{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .store_img img{
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
 .store_wrap{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.store_img p {
+    font-size: 18px;
 }
