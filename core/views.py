@@ -10,6 +10,6 @@ def validation(request, filename):
 
         location = CoreConfig.s3.get_bucket_location(
             Bucket=bucket)['LocationConstraint']
-        url = "https://s3-%s.amazonaws.com/%s/%s" % (
+        url = "https://s3-%s.amazonaws.com/%s/static/%s" % (
             location, bucket, filename)
         return redirect(url)
