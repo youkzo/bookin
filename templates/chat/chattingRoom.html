@@ -45,7 +45,6 @@
         } else {
           messageBox.innerHTML += html;
         }
-        input.value = "";
         toRecentMessage()
       });
     
@@ -65,7 +64,7 @@
                 "X-CSRFToken": '{{csrf_token}}', 
             }
         }).then(res => {
-            socket.emit('sendMessage',{'message':input.value,'roomId':roomId,'user':{"talker":me,"talker_image":me_image,"time":res.data}})
+            socket.emit('sendMessage',{'message':input.value,'roomId':roomId,'user':{"talker":me,"talker_image":me_image,"time":res.data}}).then(()=>input.value = "");
         })
         .catch(errors => console.log(errors)) 
     })
