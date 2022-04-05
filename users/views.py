@@ -1,6 +1,11 @@
 
+from urllib import response
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
+from users.services.auth_services import reset_passowrd
+from users.services.auth_services import check_email_code
+from users.services.auth_services import send_email_auth_code
 
 from users.models import UserModel
 from django.contrib import auth
@@ -92,3 +97,48 @@ def user_image_post(request):
     file = request.FILES['file']
     upload_user_image(file, request.user.id)
     return redirect('/my-page')
+
+
+def email_authentication_view(request):
+    if request.method == 'GET':
+        return render(request, 'users/find_password.html')
+    if request.method == 'POST':
+        email_code = request.POST.get('email', '')
+
+        authentication_message = send_email_auth_code(email_code)
+        if authentication_message:
+            return render(request, 'users/find_password.html', {'error': authentication_message})
+
+        response = redirect('/check-password')
+        response.set_cookie('email', email_code)
+        return response
+
+
+def email_check_code_view(request):
+    email = request.COOKIES['email']
+    if request.method == 'GET':
+        return render(request, 'users/check-password.html')
+    if request.method == 'POST':
+        code = request.POST.get('code', '')
+        check_email_message = check_email_code(email, code)
+        if check_email_message:
+            return render(request, 'users/check-password.html', {'error': check_email_message})
+        return redirect('/reset-password')
+
+
+def reset_password_view(request):
+    email = request.COOKIES['email']
+    if request.method == 'GET':
+        return render(request, 'users/reset-password.html')
+
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password', '')
+        new_password2 = request.POST.get('new_password2', '')
+
+        if new_password != new_password2:
+            return render(request, 'users/reset-password.html', {'error': '잘못된 비밀번호입니다. 다시 확인해주세요'})
+        else:
+            reset_passowrd(email, new_password)
+            response = redirect('/sign-in')
+            response.delete_cookie('email')
+            return response

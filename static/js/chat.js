@@ -20,9 +20,7 @@ function messageInputChange(e) {
 }
 
 function sendPress(e) {
-  let sendBtn = document.getElementById("sendBtn");
   if (e.keyCode == 13 && !e.shiftKey) {
     document.getElementById("sendBtn").click();
-    sendBtn.setAttribute("disabled", "disabled");
   }
 }

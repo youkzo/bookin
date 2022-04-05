@@ -10,6 +10,8 @@
   <script src="{% static 'js/myPage.js' %}"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function (event) {
+      let currentImage = document.getElementById("currentImage");
+      currentImage.src = "{{ user.user_image }}"+"?time="+new Date().getTime();
       const message = '{{ message }}';
       if (message) {
         Eggy({title: '유저네임이 변경되지 않았습니다', message: message, type: 'error'});
@@ -38,7 +40,7 @@
         {% csrf_token %}
         {% include 'users/userImageCheckModal.html' %}
         <label for="file">
-          <img src="{{user.user_image}}" alt="" class="w-52 h-52 rounded-full border-2 object-center object-cover cursor-pointer">
+          <img id="currentImage" src="#" alt="" class="w-52 h-52 rounded-full border-2 object-center object-cover cursor-pointer">
           <input type="file" id="file" name="file" accept="image/*" class="hidden">
         </label>
       </form>

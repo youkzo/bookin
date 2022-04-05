@@ -10,4 +10,10 @@ urlpatterns = [
     path('my-page/', views.my_profile_page, name='my-page'),
     path('api/upload-user-image/', views.user_image_post,
          name='upload-user-image'),
+    path('find-password/', views.email_authentication_view,
+         name='email-authentication'),
+    path('check-password/', views.email_check_code_view,
+         name='email-check'),
+    path('reset-password/', views.reset_password_view,
+         name='reset-password'),
 ]

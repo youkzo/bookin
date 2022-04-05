@@ -23,22 +23,14 @@ toml = "*"
 
 [[package]]
 name = "boto3"
-<<<<<<< HEAD
 version = "1.21.23"
-=======
-version = "1.21.21"
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-<<<<<<< HEAD
 botocore = ">=1.24.23,<1.25.0"
-=======
-botocore = ">=1.24.21,<1.25.0"
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -47,11 +39,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-<<<<<<< HEAD
 version = "1.24.23"
-=======
-version = "1.24.21"
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -198,11 +186,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-<<<<<<< HEAD
 content-hash = "7a56b7bd97144d61010428aa6bab9ef4a9b04e7b89ca95da0458c887dea31d35"
-=======
-content-hash = "604e4b408e6139cabde03956b734436ff6fdc8029cd8c8829a9e4a0b0fcfa057"
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 
 [metadata.files]
 asgiref = [
@@ -214,21 +198,12 @@ autopep8 = [
     {file = "autopep8-1.6.0.tar.gz", hash = "sha256:44f0932855039d2c15c4510d6df665e4730f2b8582704fa48f9c55bd3e17d979"},
 ]
 boto3 = [
-<<<<<<< HEAD
     {file = "boto3-1.21.23-py3-none-any.whl", hash = "sha256:c60d2401226c723db809df5c611a850c101b562e0e0790be7631a38b82813038"},
     {file = "boto3-1.21.23.tar.gz", hash = "sha256:44a30268702c78aa355a0044fa7fea5f1e7e7c125ad029196028787eea003c2e"},
 ]
 botocore = [
     {file = "botocore-1.24.23-py3-none-any.whl", hash = "sha256:536d5fcec2dfaf9671b9d361c2479ef435bfb905f73e24f6fbe73bc33ba66dfe"},
     {file = "botocore-1.24.23.tar.gz", hash = "sha256:1c8a77809dd59bf4084780ea1785c38d0ebcacd385d83fb7f6ad81648bbb22dc"},
-=======
-    {file = "boto3-1.21.21-py3-none-any.whl", hash = "sha256:8fa32fcc8be38327bd667237223d71e5e4b2475f39d6882aca4dbad19fff8c29"},
-    {file = "boto3-1.21.21.tar.gz", hash = "sha256:6fa0622f308cfd1da758966fc98b52fbd74b80606d14586c8ad82c7a6c4f32d0"},
-]
-botocore = [
-    {file = "botocore-1.24.21-py3-none-any.whl", hash = "sha256:92daca8775e738a9db9b465d533019285f09d541e903233261299fd87c2f842c"},
-    {file = "botocore-1.24.21.tar.gz", hash = "sha256:7e976cfd0a61601e74624ef8f5246b40a01f2cce73a011ef29cf80a6e371d0fa"},
->>>>>>> 2384279d2d553f8d041cbe7c0240442a877aeb4d
 ]
 django = [
     {file = "Django-4.0.3-py3-none-any.whl", hash = "sha256:1239218849e922033a35d2a2f777cb8bee18bd725416744074f455f34ff50d0c"},
