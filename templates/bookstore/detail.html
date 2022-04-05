@@ -65,7 +65,7 @@
     {% endif %}
     <div class="book_info">
         {% for user in rentuser %}
-            <p>{{ user.user_rented.username }}님이 {{ user.exp_date }}까지 대여했습니다</p>
+            <p>{{ user.user_rented.username }} 님이 {{ user.exp_date |date:"Y-m-d"}} 까지 대여했습니다</p>
         {% endfor %}
     </div>
 </div>

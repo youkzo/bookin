@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import datetime
 from django.shortcuts import redirect, render
 from books.models import BookRentByUser, BooksModel
@@ -43,14 +44,20 @@ def detail(request, book_pk):
         book.is_rent = status
         book.save()
 
-        rented_info = BookRentByUser.objects.create(
-            # updated_at = datetime.date.today(),
-            # created_at = datetime.date.today(),
-            book_id = book.pk,
-            user_rented_id = request.POST['user_rented_id'],
-            exp_date = request.POST['returnday'],
-        )
-        return redirect('detail', book.pk)
+        try:
+            rented_info = BookRentByUser.objects.create(
+                # updated_at = datetime.date.today(),
+                # created_at = datetime.date.today(),
+                book_id = book.pk,
+                user_rented_id = request.POST['user_rented_id'],
+                exp_date = request.POST['returnday'],
+            )
+            return redirect('detail', book.pk)
+
+        except ValueError:
+            return redirect('detail', book.pk)
+
+            
 
     context = {
         'book':book, 
