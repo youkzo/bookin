@@ -1,6 +1,8 @@
 from django.test import TestCase
+from users.services.auth_services import send_email_auth_code
 from users.services.profile_services import get_my_book_list
 from like.services.like_service import do_like
+from users.services.auth_services import make_email_auth_code
 from bookstore.models import BookStoreModel
 from books.models import BooksModel
 from users.models import UserModel
@@ -48,3 +50,12 @@ class TestProfile(TestCase):
         my_book = get_my_book_list(user.id, 0, 20)
 
         self.assertEqual(20, my_book.count())
+
+    def test_make_auth_num(self):
+        auth_num = make_email_auth_code()
+        print(auth_num)
+
+    def test_send_email(self):
+        user = UserModel.objects.create(
+            username='test', email='wkddnjsdl00@naver.com')
+        send_email_auth_code(user.email)
