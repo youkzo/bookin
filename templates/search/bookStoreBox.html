@@ -1,0 +1,6 @@
+<a href="{% url 'store' bookstore.id %}" class="w-80 h-72 flex flex-col border rounded-md mx-3 items-center">
+    <img class="w-full h-3/5 rounded-t-md" src="{{ bookstore.store_img }}" alt="">
+    <div class="w-full border-t">
+        <div>{{ bookstore.store_name }}</div>
+    </div>
+</a>

@@ -3,11 +3,12 @@ from django.shortcuts import redirect, render
 from search.services import search_book_and_bookstore
 
 
-def search_all(request, search_word):
+def search_all(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:
-            return redirect('/')
-        else:
+            search_word = request.GET.get('word')
             books, bookstores = search_book_and_bookstore(search_word)
-            return render(request, 'search/search_main.html', {'books': books, 'bookstores': bookstores})
+            return render(request, 'search/search_main.html', {'books': books, 'bookstores': bookstores, 'word': search_word})
+        else:
+            return redirect('/')

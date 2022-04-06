@@ -19,8 +19,8 @@
     <script type="text/javascript" src="/static/js/base.js"></script>
     <!-- 구글폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
     {% block css %}
     {% endblock %}
 
@@ -32,7 +32,9 @@
             <a href="/"><img src="{% static '/img/bookin_logo.png' %}"></a>
         </div>
         <div id="menu_search">
-            <input name="search" placeholder="   search...">
+          <form method="get" action="{% url 'search-all' %}">
+            <input id="search" type="text" name="word" class="p-3" placeholder="search...">
+          </form>
         </div>
         {% if not user.is_authenticated %}
         <div id="menu_items">
