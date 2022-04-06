@@ -33,3 +33,12 @@ class BookRentByUser(BaseModel):
     book = models.ForeignKey(
         "BooksModel", related_name="rent", on_delete=models.CASCADE)
     exp_date = models.DateField(null=True)
+
+class BookReview(BaseModel):
+    content = models.TextField()
+    review_rating =  models.IntegerField(default=0)
+    writer = models.ForeignKey(
+        "users.UserModel", related_name="review", on_delete=models.CASCADE)   
+    book = models.ForeignKey(
+        "BooksModel", related_name="review", on_delete=models.CASCADE)
+        

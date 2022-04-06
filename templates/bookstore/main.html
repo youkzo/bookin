@@ -17,7 +17,7 @@
 
 {#자바스크립트 파일 넣는 곳#}
 {% block js %}
-    {#<script type="text/javascript" src="{% static '/js/해당앱.js' %}"></script>#}
+
     <!-- 메인슬릭 -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript">
@@ -35,10 +35,19 @@
 {% block content %}
 
 
-<div class="main_top">
-        <img  src="{% static '/img/main4.jpg' %}">
-        <img  src="{% static '/img/main3.jpg' %}">        
-        <!-- <img  src="{% static '/img/main_2.jpg' %}">     -->
+    <div class="main_top">
+            <img  src="{% static '/img/main4.jpg' %}">
+            <img  src="{% static '/img/main3.jpg' %}">         
+     
+    </div>
+
+
+<div>
+    <p class="decoration-sky-500">
+        전체스토어
+        request.user: {{ request.user.pk }}
+        
+    </p>
 </div>
 
 

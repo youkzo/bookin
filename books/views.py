@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 import datetime
 from django.shortcuts import redirect, render
-from books.models import BookRentByUser, BooksModel
+from books.models import BookRentByUser, BookReview, BooksModel
 from django.utils.datastructures import MultiValueDictKeyError
 
 from bookstore.models import BookStoreModel
@@ -16,7 +16,9 @@ def main(request):
 def detail(request, book_pk):
     book = BooksModel.objects.get(pk=book_pk)
     buyer = ChatRoom.objects.filter(participants=request.user.pk)
-    rentuser = BookRentByUser.objects.filter(book_id=book_pk)
+    
+    #해당책후기 가져오기
+    reviews = BookReview.objects.filter(book_id=book_pk)
 
     # 도서정보수정
     if 'status_edit' in request.POST:
@@ -62,8 +64,23 @@ def detail(request, book_pk):
     context = {
         'book':book, 
         'buyer':buyer, 
-        'rentuser':rentuser
+        'reviews':reviews
     }
 
     return render(request, 'bookstore/detail.html', context)
 
+
+def review(request, book_pk):
+    book = BooksModel.objects.get(pk=book_pk)
+
+    #리뷰작성
+    if request.method == "POST":
+        review = BookReview.objects.create(
+            content = request.POST['content'],
+            review_rating = request.POST['review_rating'],
+            writer_id = request.user.pk,
+            book_id = book_pk
+        )
+        return redirect('my-page')
+
+    return render(request, 'bookstore/review.html', {'book':book})
