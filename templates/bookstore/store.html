@@ -51,7 +51,7 @@ bookstore_id : {{ store.id }} -->
             {% for book in books %}
                 <div id="uploaed_book">
                     <img src="{{book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
-                    {% if book.is_rent == True%}
+                    {% if book.is_rented == 0%}
                         <div id="onsale">대여가능</div>
                     {% else %}
                         <div id="rented">대여중</div>

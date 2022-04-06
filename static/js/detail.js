@@ -1,3 +1,20 @@
+//책이미지수정
+$(document).on("input", "input:file", function () {
+    readURL(this);
+  });
+  
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $("#currentImage").attr("src", e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+      openModal();
+    }
+  }
+
+
 // 대여상태수정 모달팝업창
 $(function(){
     $(".status-edit").click(function(){

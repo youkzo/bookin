@@ -44,9 +44,15 @@ def mystore(request, pk):
 
         # 스토어 정보 수정(팝업)
         elif 'store_info_edit' in request.POST:
+            if len(request.FILES.getlist('store_img')) == 0:
+                img_url = owner.store_img
+            else:
+                img_url = image_upload('editedimg', request.FILES['store_img'], owner.pk)
+
+
             owner.store_name = request.POST['store_name']
             owner.store_info = request.POST['store_info']
-            owner.store_img = request.POST['store_img']
+            owner.store_img = img_url
             owner.save()
 
             return redirect('mystore', owner.user.pk)

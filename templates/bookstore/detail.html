@@ -38,7 +38,7 @@
     <img src="{{ book.book_img }}">
     <div class="book_title">{{book.book_name }}</div>
     <div id="for_user">
-        {% if book.is_rent == True %}
+        {% if book.is_rented == 0 %}
         <div id="onsale">대여가능</div>
         {% else %}
         <div id="rented">대여중</div>
@@ -64,7 +64,7 @@
         </a>
     {% endif %}
     <div class="book_info">
-        {% for user in rentuser %}
+        {% for user in rented_info %}
             <p>{{ user.user_rented.username }} 님이 {{ user.exp_date |date:"Y-m-d"}} 까지 대여했습니다</p>
         {% endfor %}
     </div>
@@ -87,12 +87,16 @@
     <div id="_store_register">
         <p id="book_edit_title">도서 정보수정</p>
         
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div id="status_wrap">
             <div class="book_edit"> 
                 <p>책이미지</p>
-                <input name="book_img" value="{{book.book_img}}">
+                <label for="file">
+                    <img id="currentImage" src="{{ book.book_img }}" alt="" class="w-52 h-52 rounded border-2 object-center object-cover cursor-pointer">
+                    <input type="file" id="file" name="book_img" accept="image/*">
+                </label>
+     
             </div>
             <div class="book_edit">
                 <p>책이름:</p>
@@ -128,12 +132,14 @@
             </div>
             <div class="book_edit">
                 <span id="cb_text"></span>
-                {% if book.is_rent == True %} 
+                {% if book.is_rented == 0 %} 
                 <input id="cb_status" type="checkbox" name="is_rent" checked>
                 {% else %}
                 <input id="cb_status" type="checkbox" name="is_rent">
                 {% endif %}
             </div>
+
+
             <div class="book_edit">
                 <p>구매자</p>
                 <select name="user_rented_id" id="buyer_info">
