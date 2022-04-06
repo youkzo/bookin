@@ -19,7 +19,7 @@ class BooksModel(BaseModel):
     book_img = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     book_views = models.IntegerField(default=0)
-    is_rent = models.BooleanField(default=False)
+    is_rented = models.BooleanField(default=False)
     like_count = models.IntegerField(default=0)
     my_likes: List[Any]
 
