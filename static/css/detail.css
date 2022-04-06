@@ -1,5 +1,5 @@
 #detail_wrap{
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     width: 60vw;
     height: 90vh;
     border-radius: 25px;
@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
+    margin-bottom: 10%;
 }
 
 #detail_wrap img {

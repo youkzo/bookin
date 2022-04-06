@@ -14,6 +14,7 @@ def mystore(request, pk):
     try:
         # 로그인한 유저의 스토어정보 & 업로드한 도서정보 불러오기
         owner = BookStoreModel.objects.get(user_id=pk)
+        print('pk:', pk, 'owner.user.pk:',owner.user.pk, 'owner.user_id:', owner.user_id)
         books = BooksModel.objects.filter(user_id=pk)
 
         # 도서 업로드
@@ -53,7 +54,7 @@ def mystore(request, pk):
     # 스토어에 데이터가 없는 경우(에러메시지+스토어등록버튼 표시)
     except BookStoreModel.DoesNotExist:
         if 'store_register' in request.POST:
-            print('mystore.store.register')
+            # print('mystore.store.register')
             store_register = BookStoreModel.objects.create(
                 store_name=request.POST['store_name'],
                 store_info=request.POST['store_info'],
@@ -63,6 +64,7 @@ def mystore(request, pk):
                 'bookstores', request.FILES['store_img'], store_register.pk)
             store_register.store_img = img_url
             store_register.save()
+
             return redirect('mystore', pk)
 
         return render(request, 'bookstore/mystore.html', {'error': '스토어정보가 없습니다'})

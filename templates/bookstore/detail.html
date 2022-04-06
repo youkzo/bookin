@@ -65,11 +65,17 @@
     {% endif %}
     <div class="book_info">
         {% for user in rentuser %}
-            <p>{{ user.user_rented.username }}님이 {{ user.exp_date }}까지 대여했습니다</p>
+            <p>{{ user.user_rented.username }} 님이 {{ user.exp_date |date:"Y-m-d"}} 까지 대여했습니다</p>
         {% endfor %}
     </div>
-</div>
+    
+    {% for review in reviews %}
+        {{review.writer.username}} : {{review.content}}, {{review.review_rating}}점
+        
+    {% endfor %}
 
+
+</div>
 
 
 <!-- 도서상태수정팝업창 -->
@@ -79,10 +85,15 @@
         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
     </svg>
     <div id="_store_register">
+        <p id="book_edit_title">도서 정보수정</p>
+        
     <form method="POST">
         {% csrf_token %}
         <div id="status_wrap">
-            <p id="book_edit_title">도서 정보수정</p>
+            <div class="book_edit"> 
+                <p>책이미지</p>
+                <input name="book_img" value="{{book.book_img}}">
+            </div>
             <div class="book_edit">
                 <p>책이름:</p>
                 <input name="book_name" value="{{book.book_name}}">
@@ -104,10 +115,7 @@
                     {% endfor %}
                 </select> 
             </div>
-            <div class="book_edit"> 
-                <p>책이미지</p>
-                <input name="book_img" value="{{book.book_img}}"">
-            </div>
+            
             <div class="book_edit"> 
                 <p>카테고리:</p>
                 <select name="category" id="select_category">
@@ -149,6 +157,10 @@
     </div>
 
 </dialog>
+
+
+
+
 
 
 {% endblock %}

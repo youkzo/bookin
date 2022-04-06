@@ -20,8 +20,9 @@
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
 
-    <!-- 마이스토어:user.pk {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
-    store_pk : {{ owner.pk }} -->
+    마이스토어:owner.user.pk  {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
+    store_pk : {{ owner.pk }}
+    user_id: {{request.user.id}}
 
 <!-- 스토어등록되어있는지 확인 -->
 <!-- 스토어 등록되어있으면 정보 불러오기 -->
@@ -61,7 +62,8 @@
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg>
         <div id="_store_register">
-            <form method="POST" enctype="multipart/form-data">
+            <form action="/bookstore/mystore/{{request.user.id}}" method="POST" enctype="multipart/form-data">
+
                 {% csrf_token %}
                 <div id="register_wrap">
                     <p id="register_title">내 책방 등록</p>

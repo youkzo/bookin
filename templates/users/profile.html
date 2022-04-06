@@ -83,4 +83,13 @@
       </div>
     </div>
 
+    <div>
+      <h1 style="color:red">후기&별점 추가부분</h1>
+      {% for my in rented_books%}
+          <p  onclick="location.href = '{% url 'review' my.book_id %}'">내가빌린책들 : {{ my.book }}</p>        
+      {% endfor %}
+    </div>
+
+
+
   {% endblock %}

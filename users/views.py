@@ -3,6 +3,7 @@ from urllib import response
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
+from books.models import BookRentByUser
 from users.services.auth_services import reset_passowrd
 from users.services.auth_services import check_email_code
 from users.services.auth_services import send_email_auth_code
@@ -69,8 +70,12 @@ def delete_user(request):
 def my_profile_page(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
+        #빌린책후기&별점
+        # rentuser = BookRentByUser.objects.filter(book_id=book_pk)
+        rented_books = BookRentByUser.objects.filter(user_rented_id=request.user.pk)
+
         if user:
-            return render(request, 'users/profile.html')
+            return render(request, 'users/profile.html', {'rented_books':rented_books})
         else:
             return redirect("/")
     elif request.method == 'POST':
