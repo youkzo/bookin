@@ -13,6 +13,7 @@ class BookStoreModel(BaseModel):
     store_info = models.TextField()
     store_img = models.CharField(max_length=255)
     store_views = models.IntegerField(default=0)
+    like_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.store_name
