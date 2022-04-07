@@ -1,8 +1,10 @@
 $(document).on("input", "input:file", function () {
+  console.log('사진클릭')
   readURL(this);
 });
 
 function readURL(input) {
+  console.log('redurl함수실행')
   if (input.files && input.files[0]) {
     let reader = new FileReader();
     reader.onload = function (e) {
