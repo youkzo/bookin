@@ -7,7 +7,7 @@
 .store_img{
     width: 250px;
     height: 250px;
-    margin: 5%;
+    margin: 5% 0 5% 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,4 +24,5 @@
 }
 .store_img p {
     font-size: 18px;
+    margin-top: 10px;
 }

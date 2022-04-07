@@ -62,5 +62,17 @@ $(document).ready(function(){
 });
 
 
-
-
+// 후기박스 보이기
+$(function(){
+    $(".list_title").click(function(){
+        console.log('open')
+        let list_val = $(this).attr('value');
+        let rvbox = document.getElementById(list_val);
+        console.log(rvbox.getAttribute('class'))
+        if(rvbox.getAttribute('class') == "hidden"){
+            rvbox.classList.replace("hidden","active");
+        } else {
+            rvbox.classList.replace("active","hidden");
+        }
+    });
+});

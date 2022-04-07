@@ -6,6 +6,10 @@
   프로필
 {% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/myPage.css' %}">
+{% endblock %}
+
 {% block js %}
   <script src="{% static 'js/myPage.js' %}"></script>
   <script>
@@ -83,12 +87,26 @@
       </div>
     </div>
 
-    <div>
-      <h1 style="color:red">후기&별점 추가부분</h1>
+
+    <!-- 리뷰별점팝업 -->
+
+    <div id="rented_list">
+      <div id="list_title">내가 빌린 책들</div>
+      {% if rented_books %}
       {% for my in rented_books%}
-          <p  onclick="location.href = '{% url 'review' my.book_id %}'">내가빌린책들 : {{ my.book }}</p>        
+      <div id="list_box" onclick="location.href ='{% url 'review' my.book.pk %}'">
+        <img src="{{ my.book.book_img }}"> 
+        <div id="book_name">{{ my.book }}</div>
+      </div>        
       {% endfor %}
+      {% else %}
+      <div id="rented_msg">
+        <p>대여한 책이 없습니다</p>
+      </div>
+      {% endif %}
     </div>
+    
+    
 
 
 

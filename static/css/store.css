@@ -48,13 +48,13 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    margin-left: 120px;
+    margin-left: 100px;
 }
 
 #uploaed_book {
-    margin: 2%;
-    width: 250px;
-    height: 450px;
+    margin: 3% 0 2% 2%;
+    width: 200px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,7 +1,7 @@
 .bg_img{
     width: 100vw;
     height: 45vh;
-    background-color: bisque;
+    /* background-color: bisque; */
 }
 #store_wrap {
     display: flex;
@@ -38,16 +38,11 @@
     padding: 2px;
 }
 
-#books_upload{
-    border: 1px solid black;
-    width: 500px;
-}
-
 #uploaed_book_wrap{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    margin-left: 120px;
+    margin-left: 100px;
 }
 
 #uploaed_book {
@@ -55,9 +50,9 @@
 }
 
 #uploaed_book {
-    margin: 2%;
-    width: 250px;
-    height: 450px;
+    margin: 3% 0 2% 2%;
+    width: 200px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,8 +100,9 @@ form.storeinfo_form {
     border-radius: 10px;
     margin-top: 5px;
     background-color: white;
+    box-shadow: 0px 0px 70px 40px #706f6f;
 }
-div#edit_wrap {
+#edit_wrap {
     display: flex;
     flex-direction: column;
 }
@@ -114,25 +110,27 @@ div#edit_wrap {
     display: flex;
     height: 70px;
     align-items: center;
+    width: 300px;
+    margin: auto;
 }
-.bg_edit p {
+.pop_p {
     width: 130px;
-    margin-left: 20px;
+    padding-left: 10px;
 }
+
 .bg_edit input {
     margin: auto;
-    padding: 5px;
-    outline-color: beige;
+    padding-left: 10px;
 }
-textarea.edit_input {
+.edit_input {
     margin: auto;
     height: 90px;
     margin-top: 20px;
-    outline-color: beige;
     padding: 5px;
+    outline: none;
 }
 #store_edit_btn {
-    margin: 120px auto;
+    margin: 60px auto;
     background-color: powderblue;
     width: 100px;
     border-radius: 5px;
@@ -148,6 +146,8 @@ textarea.edit_input {
 svg.bi.bi-x-circle.btn {
     margin-left: auto;
     cursor: pointer;
+    z-index: 100;
+    position: relative;
 }
 
 
@@ -159,6 +159,10 @@ svg.bi.bi-x-circle.btn {
     height: 500px;
     background-color: transparent;
 }
+.edit_img {
+    margin: auto;
+}
+
 #books_upload {
     height: 570px;
     width: 400px;
@@ -166,6 +170,7 @@ svg.bi.bi-x-circle.btn {
     border-radius: 10px;
     margin-top: 5px;
     background-color: white;
+    box-shadow: 0px 0px 70px 40px #706f6f;
 }
 div#edit_wrap {
     display: flex;
@@ -204,6 +209,8 @@ div#edit_wrap {
 svg.bi.bi-x-circle.btn {
     margin-left: auto;
     cursor: pointer;
+    position: relative;
+    z-index: 100;
 }
 #cb_text {
     padding: 30px;
@@ -229,9 +236,9 @@ svg.bi.bi-x-circle.btn {
 }
 .error_msg{
     margin: 20px;
-    font-size: 20px;
-    color: #ff861e;
-    font-weight: bolder;
+    font-size: 18px;
+    /* color: #ff861e; */
+    /* font-weight: bolder; */
     text-align: center;
 }
 
@@ -248,7 +255,7 @@ svg.bi.bi-x-circle.btn {
     border-radius: 10px;
     margin-top: 5px;
     background-color: white;
-    border: 1px dotted darkgray;
+    box-shadow: 0px 0px 70px 40px #706f6f;
 }
 #register_wrap {
     display: flex;
@@ -258,6 +265,7 @@ svg.bi.bi-x-circle.btn {
     display: flex;
     height: 50px;
     align-items: center;
+    margin-top: 10px;
 }
 .store_regi p {
     width: 100px;
@@ -271,7 +279,7 @@ svg.bi.bi-x-circle.btn {
 }
 
 #register_btn {
-    margin: 150px auto 0 130px;
+    margin: 50px auto 0 130px;
     background-color: powderblue;
     width: 100px;
     border-radius: 5px;
@@ -289,3 +297,8 @@ svg.bi.bi-x-circle.btn {
     margin-left: auto;
     cursor: pointer;
 }
+
+.store_regi_img{
+    margin: auto;
+}
+
