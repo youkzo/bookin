@@ -6,8 +6,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'img/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <title>회원가입</title>
   </head>
 
   <body>
@@ -23,28 +25,31 @@
         <form class="mt-8 space-y-6" action="/sign-up/" method="POST">
           {% csrf_token %}
           <input type="hidden" name="remember" value="true">
-          <div class="rounded-md shadow-sm -space-y-px">
+          <div class="rounded-md shadow-sm space-y-px">
             <div>
-              <label for="email-address" class="block text-sm font-medium text-gray-700">이름</label>
-              <input id="email-address" name="username" type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 placeholder-shown:border-gray-500 focus:z-10 sm:text-sm" placeholder="이름">
+              <label for="username" class="block text-sm font-medium text-gray-700">이름</label>
+              <input id="username" name="username" type="text" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이름">
             </div>
             <div>
               <label for="email-address" class="block text-sm font-medium text-gray-700">이메일</label>
-              <input id="email-address" name="email" type="email" autocomplete="email" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이메일">
-            </div>
-
-            <div>
-              <label for="email-address" class="block text-sm font-medium text-gray-700">비밀번호</label>
-              <input id="password" name="password" type="password" autocomplete="current-password" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
+              <input id="email-address" name="email" type="email" autocomplete="email" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이메일">
             </div>
             <div>
-              <label for="email-address" class="block text-sm font-medium text-gray-700">비밀번호 확인</label>
-              <input id="password2" name="password2" type="password" autocomplete="current-password" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호 확인">
+              <label for="password" class="block text-sm font-medium text-gray-700">비밀번호</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
+            </div>
+            <div>
+              <label for="password2" class="block text-sm font-medium text-gray-700">비밀번호 확인</label>
+              <input id="password2" name="password2" type="password" autocomplete="current-password" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-10 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호 확인">
+            </div>
+            <div class="bg-blue-900 rounded w-full h-0.5"></div>
+            <div>
+              <label for="location" class="block text-sm font-medium text-gray-700 mt-10">지역</label>
+              <input id="location" onclick="getLocation(this)" name="location" type="text" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="지역 설정">
             </div>
           </div>
 
           <div class="flex items-center justify-end">
-
             <div class="text-sm">
               <a href="/sign-in/" class="font-medium text-blue-600 hover:text-blue-500">
                 계정이 있으신가요?
@@ -75,6 +80,16 @@
 
     </div>
   </div>
+  <script>
+    function getLocation(e){
+      new daum.Postcode({
+        oncomplete: function(data) {
+            e.value = `${data.sido} ${data.sigungu}`
+        }
+    }).open();
+    }
+    
+</script>
 </body>
 
 </html>

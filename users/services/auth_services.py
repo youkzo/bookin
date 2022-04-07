@@ -6,7 +6,7 @@ import string
 import random
 
 
-def create_an_user(email, username, password, password2):
+def create_an_user(email, username, password, password2, location):
     error = None
     exist_user = get_user_model().objects.filter(email=email).exists()
     if password != password2:
@@ -19,7 +19,7 @@ def create_an_user(email, username, password, password2):
         return error
     else:
         UserModel.objects.create_user(
-            username=username, email=email, password=password)
+            username=username, email=email, password=password, location=location)
         return error
 
 
