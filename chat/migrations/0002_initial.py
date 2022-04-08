@@ -10,18 +10,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('chat', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('like', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='likemodel',
+            model_name='message',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='like', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='messages', to=settings.AUTH_USER_MODEL),
         ),
-        migrations.AddConstraint(
-            model_name='likemodel',
-            constraint=models.UniqueConstraint(fields=('user', 'book'), name='unique_user_book'),
+        migrations.AddField(
+            model_name='chatroom',
+            name='participants',
+            field=models.ManyToManyField(blank=True, related_name='chatroom', to=settings.AUTH_USER_MODEL),
         ),
     ]
