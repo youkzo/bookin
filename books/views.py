@@ -5,11 +5,26 @@ from books.models import BookRentByUser, BookReview, BooksModel
 from bookstore.models import BookStoreModel
 from chat.models import ChatRoom
 from core.services import image_upload
+from users.models import UserModel
 
 
 def main(request):
-    stores = BookStoreModel.objects.all()
-    return render(request, 'bookstore/main.html', {'stores': stores})
+    #로그인한 유저와 같은 지역의 서점 불러오기
+    user = request.user
+    pk_list = []
+    print('내지역>>', user.location)
+    local_list = list(UserModel.objects.filter(location = user.location))
+    for local in local_list:
+        pk_list.append(local.pk)
+    stores = BookStoreModel.objects.filter(user__in=pk_list).order_by('-created_at')  
+    #로그인한 유저와 같은 지역의 책들 불러오기
+    books = BooksModel.objects.filter(user__in=pk_list).order_by('-created_at')  
+
+    context = {
+            'stores': stores,
+            'books': books
+        }
+    return render(request, 'bookstore/main.html', context)
 
 # 스토어페이지에서 책 클릭하면 디테일 페이지로 이동
 
@@ -26,7 +41,7 @@ def detail(request, book_pk):
 
     # 도서정보수정
     if 'status_edit' in request.POST:
-        print('>>>',len(request.FILES.getlist('book_img')))
+        # print('>>>',len(request.FILES.getlist('book_img')))
         # try:
         #     if request.POST['is_rent'] == 'on':
         #         status = True
