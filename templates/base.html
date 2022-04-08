@@ -6,7 +6,7 @@
     <title>{% block title %}{% endblock %} | Bookin</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
-    <link href="{% static 'img/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static '/img/favi.png' %}" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/bookin_style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
 <body>
     <nav id="menu_container">
         <div id="menu_logo">
-            <a href="/"><img src="{% static '/img/bookin_logo.png' %}"></a>
+            <a href="/"><img src="{% static '/img/header_logo.png' %}"></a>
         </div>
         <div id="menu_search">
           <form method="get" action="{% url 'search-all' %}">
@@ -39,21 +39,23 @@
         </div>
         {% if not user.is_authenticated %}
         <div id="menu_items">
-            <a href="/sign-in"><img src="{% static '/img/signin.png' %}"></a>
+            <a href="/sign-in"><img src="{% static '/img/nav_signin.png' %}"></a>
         </div>
         <div id="menu_items">
-            <a href="/sign-up"><img src="{% static '/img/signup.png' %}"></a>
+            <a href="/sign-up"><img src="{% static '/img/nav_signup.png' %}"></a>
         </div>
         {% else%}
-        <div id="menu_items"><a href="/chat_room_list">채팅 리스트</a></div>
         <div id="menu_items">
-            <img class="cursor-pointer" onclick="dropdown();" src="{% static '/img/mypage.png' %}">
+            <a href="/chat_room_list"><img src="{% static '/img/nav_msg.png' %}"></a>
+        </div>
+        <div id="menu_items">
+            <img class="cursor-pointer" onclick="dropdown();" src="{% static '/img/nav_my.png' %}">
             <div id="dropmenu" class="drop">
                 <div onclick="location.href='/my-page'">Hello! {{user.username}}</div>
-                <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">My책방</div>    
+                <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">내 책방</div>    
             </div>
         </div>
-        <div id="menu_items"><a href="/logout"><img  src="{% static '/img/logout.png' %}"></a></div>
+        <div id="menu_items"><a href="/logout"><img  src="{% static '/img/nav_logout.png' %}"></a></div>
         {% endif %}
         
         

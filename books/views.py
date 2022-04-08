@@ -9,22 +9,37 @@ from users.models import UserModel
 
 
 def main(request):
-    #로그인한 유저와 같은 지역의 서점 불러오기
-    user = request.user
-    pk_list = []
-    print('내지역>>', user.location)
-    local_list = list(UserModel.objects.filter(location = user.location))
-    for local in local_list:
-        pk_list.append(local.pk)
-    stores = BookStoreModel.objects.filter(user__in=pk_list).order_by('-created_at')  
-    #로그인한 유저와 같은 지역의 책들 불러오기
-    books = BooksModel.objects.filter(user__in=pk_list).order_by('-created_at')  
+    if request.method == 'GET':
+        #로그인 했을 때
+        user = request.user.is_authenticated
+        if user:
+            #로그인한 유저와 같은 지역의 서점 불러오기
+            user = request.user
+            pk_list = []
+            # print('내지역>>', user.location)
+            local_list = list(UserModel.objects.filter(location = user.location))
+            for local in local_list:
+                pk_list.append(local.pk)
+            stores = BookStoreModel.objects.filter(user__in=pk_list).order_by('-created_at')  
+            #로그인한 유저와 같은 지역의 책들 불러오기
+            books = BooksModel.objects.filter(user__in=pk_list).order_by('-created_at')  
 
-    context = {
-            'stores': stores,
-            'books': books
-        }
-    return render(request, 'bookstore/main.html', context)
+            context = {
+                    'stores': stores,
+                    'books': books
+                }
+            return render(request, 'bookstore/main.html', context)
+        else:
+            #서점 불러오기
+            stores = BookStoreModel.objects.all()
+            #책 불러오기
+            books = BooksModel.objects.all()
+
+            context = {
+                    'stores': stores,
+                    'books': books
+                }
+            return render(request, 'bookstore/main.html', context)
 
 # 스토어페이지에서 책 클릭하면 디테일 페이지로 이동
 
