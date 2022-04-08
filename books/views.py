@@ -79,16 +79,31 @@ def detail(request, book_pk):
 
 
 def review(request, book_pk):
-    book = BooksModel.objects.get(pk=book_pk)
+    try:
+        book = BooksModel.objects.get(pk=book_pk)
+        reviews = BookReview.objects.get(book_id=book_pk, writer_id=request.user.pk)
+    except BookReview.DoesNotExist:
+        
+        # 리뷰작성
 
-    # 리뷰작성
-    if request.method == "POST":
-        review = BookReview.objects.create(
-            content=request.POST['content'],
-            review_rating=request.POST['review_rating'],
-            writer_id=request.user.pk,
-            book_id=book_pk
-        )
+        if 'write_review' in request.POST:
+            review = BookReview.objects.create(
+                content=request.POST['content'],
+                review_rating=request.POST['review_rating'],
+                writer_id=request.user.id,
+                book_id=book_pk
+            )
+            return redirect('my-page')
+        return render(request, 'users/review.html', {'book': book})
+
+    
+    # 리뷰수정
+    if 'edit_review' in request.POST:
+        reviews.content=request.POST['content']
+        reviews.review_rating=request.POST['review_rating']
+        reviews.save()
+
         return redirect('my-page')
 
-    return render(request, 'bookstore/review.html', {'book': book})
+
+    return render(request, 'users/review.html', {'book': book, 'reviews': reviews})

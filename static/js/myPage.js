@@ -52,3 +52,4 @@ function checkInvalidPassword() {
     position: "bottom-right",
   });
 }
+
