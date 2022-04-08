@@ -38,59 +38,62 @@
 {% endblock %}
 
 {% block content %}
-  <div class="w-full flex flex-col justify-center items-center">
-    <div class="py-10">
-      <form action="{% url 'upload-user-image' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% include 'users/userImageCheckModal.html' %}
-        <label for="file">
-          <img id="currentImage" src="#" alt="" class="w-52 h-52 rounded-full border-2 object-center object-cover cursor-pointer">
-          <input type="file" id="file" name="file" accept="image/*" class="hidden">
-        </label>
-      </form>
-    </div>
-    <div class="flex flex-col justify-center items-center">
-      <form action="{% url 'my-page' %}" method="post">
-        {% csrf_token %}
-        <div>
-          <label for="email-address" class="block text-sm font-medium text-gray-700">이름</label>
-          <input id="usernameInput" oninput="onUsernameChange(this)" name="username" value="{{ user.username }}" required="required" type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이름">
+  <div class="w-full flex justify-center items-center">
+    <div class="w-full md:w-4/6 flex flex-col md:flex-row justify-center">
+      <div id="side_menu" class="w-full md:w-2/6 flex flex-col items-center p-5">
+        <div id="to_edit" onclick="changeView(this)" class="profile-nav-btn border-blue-900">회원정보 수정</div>
+        <div id="to_rented" onclick="changeView(this)" class="profile-nav-btn">내가 빌린 책</div>
+      </div>
+      <div id="edit_profile" class="w-full md:w-4/6 flex flex-col justify-center items-center">
+        <div class="py-10 flex justify-center">
+          <form action="{% url 'upload-user-image' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'users/userImageCheckModal.html' %}
+            <label for="file">
+              <img id="currentImage" src="#" alt="" class="w-52 h-52 rounded-full border-2 object-center object-cover cursor-pointer">
+              <input type="file" id="file" name="file" accept="image/*" class="hidden">
+            </label>
+          </form>
         </div>
-
-        <div class="">
-          <div class="flex flex-col">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">비밀번호</label>
-              <input id="password" name="password" onmousedown="checkInvalidPassword()" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" type="password" disabled="disabled" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
-
-            </div>
-            <div>
-              <label for="email-address" class="block text-sm font-medium text-gray-700">비밀번호 확인</label>
-              <input id="password2" name="password2" type="password" disabled="disabled" required="required" class="appearance-none rounded-none relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호 확인">
-            </div>
+      <div class="flex flex-col justify-center items-center">
+        <form action="{% url 'my-page' %}" method="post">
+          {% csrf_token %}
+          <div>
+            <label for="email-address" class="block text-sm font-medium text-gray-700">이름</label>
+            <input id="usernameInput" oninput="onUsernameChange(this)" name="username" value="{{ user.username }}" required="required" type="text" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="이름">
           </div>
-          <div class="flex justify-center items-start w-40 mt-10"></div>
+  
+          <div class="">
+            <div class="flex flex-col">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">비밀번호</label>
+                <input id="password" name="password" onmousedown="checkInvalidPassword()" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" type="password" disabled="disabled" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호">
+  
+              </div>
+              <div>
+                <label for="email-address" class="block text-sm font-medium text-gray-700">비밀번호 확인</label>
+                <input id="password2" name="password2" type="password" disabled="disabled" required="required" class="appearance-none rounded-md relative block w-full px-3 py-2 mb-5 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="비밀번호 확인">
+              </div>
+            </div>
+            <div class="flex justify-center items-start w-40 mt-10"></div>
+          </div>
+          {% if error %}
+            <div class="flex items-center justify-center mb-2 " role="alert">
+              <p class="text-red-600">
+                {{ error }}
+              </p>
+            </div>
+          {% endif %}
+          <div>
+            <div class="w-full flex justify-center items-center">
+              <button id="passwordBtn" onclick="passwordCanChangeBtn(this)" class="mt-6 mr-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border">비밀번호 변경</button>
+              <button type="submit" id="profileBtn" class="mt-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border" disabled="disabled">변경하기</button>
+            </div>
+          </form>
         </div>
-        {% if error %}
-          <div class="flex items-center justify-center mb-2 " role="alert">
-            <p class="text-red-600">
-              {{ error }}
-            </p>
-          </div>
-        {% endif %}
-        <div>
-          <div class="w-full flex justify-center items-center">
-            <button id="passwordBtn" onclick="passwordCanChangeBtn(this)" class="mt-6 mr-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border">비밀번호 변경</button>
-            <button type="submit" id="profileBtn" class="mt-6 bg-blue-900 border rounded-md py-1 px-5 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-white disabled:text-gray-400 disabled:border" disabled="disabled">변경하기</button>
-          </div>
-        </form>
       </div>
     </div>
-
-
-    <!-- 리뷰별점팝업 -->
-
-    <div id="rented_list">
+    <div id="rented_list" class="w-full md:w-4/6 hidden pt-10">
       <div id="list_title">내가 빌린 책들</div>
       {% if rented_books %}
       {% for my in rented_books%}
@@ -105,9 +108,5 @@
       </div>
       {% endif %}
     </div>
-    
-    
-
-
-
+  </div>
   {% endblock %}
