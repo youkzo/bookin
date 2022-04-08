@@ -45,8 +45,9 @@
             <a href="/sign-up"><img src="{% static '/img/signup.png' %}"></a>
         </div>
         {% else%}
+        <div id="menu_items"><a href="/chat_room_list">채팅 리스트</a></div>
         <div id="menu_items">
-            <img onclick="dropdown();" src="{% static '/img/mypage.png' %}">
+            <img class="cursor-pointer" onclick="dropdown();" src="{% static '/img/mypage.png' %}">
             <div id="dropmenu" class="drop">
                 <div onclick="location.href='/my-page'">Hello! {{user.username}}</div>
                 <div onclick="location.href = '{% url 'mystore' request.user.pk %}'">My책방</div>    
