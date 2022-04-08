@@ -19,6 +19,10 @@ body, h1, h2, h3, h4, h5, h6, p, span,div {
     margin-top: 80px;
 }
 
+.main_top{
+    position: relative;
+    z-index: -1;
+}
 
 #menu_items {
     width: 50px;

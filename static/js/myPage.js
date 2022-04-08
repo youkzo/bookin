@@ -13,6 +13,20 @@ function readURL(input) {
   }
 }
 
+function changeView(e) {
+  if (e.id == "to_edit") {
+    document.getElementById("to_edit").classList.add("border-blue-900");
+    document.getElementById("to_rented").classList.remove("border-blue-900");
+    document.getElementById("edit_profile").classList.remove("hidden");
+    document.getElementById("rented_list").classList.add("hidden");
+  } else if (e.id == "to_rented") {
+    document.getElementById("to_edit").classList.remove("border-blue-900");
+    document.getElementById("to_rented").classList.add("border-blue-900");
+    document.getElementById("edit_profile").classList.add("hidden");
+    document.getElementById("rented_list").classList.remove("hidden");
+  }
+}
+
 function openModal() {
   const modal = document.getElementById("modal");
   modal.classList.replace("hidden", "block");

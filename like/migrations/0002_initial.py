@@ -11,13 +11,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('bookstore', '0001_initial'),
+        ('like', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bookstoremodel',
+            model_name='likemodel',
             name='user',
-            field=models.ForeignKey(db_column='user_id', on_delete=django.db.models.deletion.CASCADE, related_name='bookstore', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='like', to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddConstraint(
+            model_name='likemodel',
+            constraint=models.UniqueConstraint(fields=('user', 'book'), name='unique_user_book'),
         ),
     ]

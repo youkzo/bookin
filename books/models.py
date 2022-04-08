@@ -19,7 +19,7 @@ class BooksModel(BaseModel):
     book_img = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     book_views = models.IntegerField(default=0)
-    is_rent = models.BooleanField(default=False)
+    is_rented = models.BooleanField(default=False)
     like_count = models.IntegerField(default=0)
     my_likes: List[Any]
 
@@ -33,3 +33,12 @@ class BookRentByUser(BaseModel):
     book = models.ForeignKey(
         "BooksModel", related_name="rent", on_delete=models.CASCADE)
     exp_date = models.DateField(null=True)
+
+class BookReview(BaseModel):
+    content = models.TextField()
+    review_rating =  models.IntegerField(default=0)
+    writer = models.ForeignKey(
+        "users.UserModel", related_name="review", on_delete=models.CASCADE)   
+    book = models.ForeignKey(
+        "BooksModel", related_name="review", on_delete=models.CASCADE)
+        

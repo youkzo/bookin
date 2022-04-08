@@ -1,5 +1,5 @@
 #detail_wrap{
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     width: 60vw;
     height: 90vh;
     border-radius: 25px;
@@ -8,12 +8,15 @@
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
+    margin-bottom: 10%;
 }
 
-#detail_wrap img {
-    width: 20vw;
-    margin-top: 5%;
+.book_cover {
+    width: 250px;
+    height: 300px;
+    margin-top: 8%;
 }
+
 
 .book_title {
     font-size: 30px;
@@ -95,6 +98,7 @@ span {
     background-color: transparent;
     width: 560px;
 }
+
 #_store_register{
     height: 700px;
     width: 530px;
@@ -102,7 +106,8 @@ span {
     border-radius: 10px;
     margin-top: 5px;
     background-color: white;
-    border: 1px dotted darkgray;
+    box-shadow: 0px 0px 70px 40px #706f6f;
+    position: absolute;
 }
 #status_wrap {
     display: flex;
@@ -134,7 +139,7 @@ span {
 }
 
 #book_edit_btn {
-    margin: 120px auto;
+    margin: 20px auto;
     background-color: powderblue;
     width: 100px;
     border-radius: 5px;
@@ -151,6 +156,8 @@ span {
 svg.bi.bi-x-circle.btn {
     margin-left: auto;
     cursor: pointer;
+    position: relative;
+    z-index: 100;
 }
 #select_rating {
     margin: auto;
@@ -167,4 +174,41 @@ span {
     border: none;
     width: 140px;
     margin: 2%;
+}
+
+
+/* 대여이력 & 후기 */
+.list_title {
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    margin: 3%;
+    align-items: center;
+    cursor: pointer;
+}
+.open_list {
+    margin-right: 15px;
+}
+#open_review {
+    margin: 20px;
+}
+#user_reviews {
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+#user_reviews > div {
+    margin: 0 20px 0 20px;
+    width: 200px;
+    flex-wrap: wrap;
+}
+
+.book_content {
+
+    margin-top: 3%;
+    border: 1px dotted darkgray;
+    border-radius: 10px;
+    padding: 2%;
+    width: 350px;
+    text-align: center;
 }

@@ -1,0 +1,36 @@
+
+#list_title {
+    text-align: center;
+    font-size: 18px;
+    border: 1px #a1a1a1 dotted;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#book_name {
+    font-size: 17px;
+}
+
+#list_box {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#list_box img {
+    width: 100px;
+}
+
+#list_box div {
+    margin: auto;
+}
+
+#rented_msg {
+    text-align: center;
+}
+
+.store_regi_img {
+    margin: auto;
+}
+

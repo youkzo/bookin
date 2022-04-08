@@ -20,8 +20,9 @@
 {#메인 컨텐츠 들어가는 곳#}
 {% block content %}
 
-    <!-- 마이스토어:user.pk {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
-    store_pk : {{ owner.pk }} -->
+    <!-- 마이스토어:owner.user.pk  {{ owner.user.pk }} , owner.pk: {{ owner.pk }}
+    store_pk : {{ owner.pk }}
+    user_id: {{request.user.id}} -->
 
 <!-- 스토어등록되어있는지 확인 -->
 <!-- 스토어 등록되어있으면 정보 불러오기 -->
@@ -56,15 +57,20 @@
 <!-- 스토어등록팝업 -->
     <dialog class="store_register">
         <!-- <button class="btn" value="store_register">X</button> -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle btn" value="store_register" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle btn" value="store_register" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg>
         <div id="_store_register">
-            <form action="/bookstoremymystore/{{store.pk}}" method="POST" enctype="multipart/form-data">
+            <form action="/bookstore/mystore/{{request.user.id}}" method="POST" enctype="multipart/form-data">
+
                 {% csrf_token %}
                 <div id="register_wrap">
                     <p id="register_title">내 책방 등록</p>
+                    <label for="file">
+                        <img id="currentImage" src="#" alt="" class="store_regi_img w-40 h-40 rounded border-2 object-center object-cover cursor-pointer">
+                        <input type="file" id="file" name="store_img" accept="image/*" class="hidden">
+                    </label>
                     <div class="store_regi">
                         <p>책방이름</p>
                         <input name="store_name">
@@ -72,10 +78,6 @@
                     <div class="store_regi">
                         <p>책방소개</p>
                         <input name="store_info">
-                    </div>
-                    <div class="store_regi"> 
-                        <p>책방이미지</p>
-                        <input name="store_img">
                     </div>
                     <button id="register_btn" type="submit" name="store_register">책방등록</button>
                 </div>
@@ -92,13 +94,13 @@
         <div id="uploaed_book_wrap">
             {% for book in books %}
                 <div id="uploaed_book">
-                    <img src="{{book.book_img}}" onclick="location.href = '{% url 'detail' book.pk %}'">
-                    {% if book.is_rent == True%}
+                    <img src="{{book.book_img}}" class="cursor-pointer" onclick="location.href = '{% url 'detail' book.pk %}'">
+                    {% if book.is_rented == False %}
                         <div id="onsale">대여가능</div>
                     {% else %}
                         <div id="rented">대여중</div>
                     {% endif %}
-                    <p>{{book.book_name}}</p>    
+                    <p>{{book.book_name}}</p>
                 </div>    
             {% endfor %}
         </div>
@@ -120,31 +122,19 @@
             {% csrf_token %}
             <div id="upload_book">
                 <div id="books_edit_title">도서등록</div>
+                <div class="books_edit_img">
+                    <label for="file">
+                        <img id="currentImage" src="#" alt="" class="edit_img w-40 h-40 rounded border-2 object-center object-cover cursor-pointer">
+                        <input type="file" id="file" name="book_img" accept="image/*" class="hidden">
+                    </label>
+                </div>
                 <div class="books_edit">
                     <p>책이름</p>
                     <input name="book_name">
                 </div>
-                <div class="books_edit">
-                    <p>가격</p>
-                    <input name="price">
-                </div>
                 <div class="books_edit"> 
                     <p>책소개</p>
                     <input name="content">
-                </div>
-                <div class="books_edit"> 
-                    <p>평점</p>
-                    <!-- <input name="rating"> -->
-                    <select name="rating" id="select_rating">
-                        <option selected>평점선택</option>
-                        {% for i in "12345" %}
-                        <option value="{{i}}">{{i}}</option>
-                        {% endfor %}
-                    </select> 
-                </div>
-                <div class="books_edit"> 
-                    <p>책이미지</p>
-                    <input name="book_img">
                 </div>
                 <div class="books_edit"> 
                     <p>카테고리</p>
@@ -157,10 +147,9 @@
                         <option value="기타">기타</option>
                     </select>
                 </div>
-                <div class="books_edit"> 
-                    <p>대여여부</p>
-                    <span id="cb_text"></span>
-                    <input id="cb_status" type="checkbox" name="is_rent" checked>
+                <div class="books_edit">
+                    <p>희망 대여료</p>
+                    <input name="price">
                 </div>
                 <button id="books_edit_btn" type="submit" name="books_upload">도서등록</button>
             </div>
@@ -174,7 +163,7 @@
     <dialog class="storeinfo_edit">
 
         <!-- <button class="btn" value="storeinfo_edit">X</button> -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle btn" value="storeinfo_edit" viewBox="0 0 16 16">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-x-circle btn" value="storeinfo_edit" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg>
@@ -183,9 +172,11 @@
         <div id="edit_wrap">
             <div id="store_edit_title">내 책방 정보수정</div>
             <!-- 스토어배경이미지 -->
-            <div class="bg_edit">
-                <p class="pop_p">책방이미지편집</p>
-                <input class="edit_input"  name="store_img" value="{{ owner.store_img }}">
+            <div class="bg_edit_img">
+                <label for="store_file">
+                    <img id="currentImage" src="{{ owner.store_img }}" alt="" class="w-30 h-40 m-auto rounded  object-cover cursor-pointer">
+                    <input type="file" id="store_file" name="store_img" accept="image/*" class="hidden">
+                </label>
             </div>
             <!-- 스토어이름변경 -->
             <div class="bg_edit">
@@ -193,7 +184,7 @@
                 <input class="edit_input"  name="store_name" value="{{ owner.store_name }}">
              </div>
              <div class="bg_edit">
-                <p>책방소개변경</p>
+                <p class="pop_p">책방소개변경</p>
                 <!-- <input class="edit_input"  name="store_info" value="{{ owner.store_info }}"> -->
                 <textarea class="edit_input"  name="store_info">{{ owner.store_info }}</textarea>
              </div>

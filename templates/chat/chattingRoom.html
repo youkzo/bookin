@@ -49,14 +49,14 @@
       });
     
     socket.emit('join', roomId)
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async(event)=> {
         event.preventDefault();
         
         let data = new FormData()
         data.append('message',input.value)
         data.append('chat_room_id',roomId)
 
-        axios({
+        await axios({
             method:'POST',
             url:url,
             data:data,
@@ -65,8 +65,7 @@
             }
         }).then(res => {
             socket.emit('sendMessage',{'message':input.value,'roomId':roomId,'user':{"talker":me,"talker_image":me_image,"time":res.data}})
-        }).then(()=>{
-            input.value = ''
+            input.value = "";
         })
         .catch(errors => console.log(errors)) 
     })

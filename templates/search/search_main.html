@@ -14,5 +14,34 @@
 
 
 {% block content %}
-
+<div class="w-full flex flex-col justify-center items-center">
+    <div class="lg:w-4/6 w-full h-96 flex border-b-2">
+        <div class="w-full flex flex-col p-5">
+            <div class="text-3xl">스토어</div>
+            {% if bookstores|length != 0 %}
+            <div class="w-full flex p-5 justify-center sm:justify-start">
+            {% for bookstore in bookstores %}
+            {% include 'search/bookStoreBox.html' %}
+            {% endfor %}
+            </div>
+            {% else %}
+            <div class="p-5">일치하는 스토어가 없습니다.</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="lg:w-4/6 w-full h-96 flex">
+        <div class="w-full flex flex-col p-5">
+            <div class="text-3xl">책</div>
+            {% if books|length != 0 %}
+            <div class="w-full flex p-5">
+                {% for book in books %}
+                {% include 'search/bookBox.html' %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="p-5">일치하는 책이 없습니다.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

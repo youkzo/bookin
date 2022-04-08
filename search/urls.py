@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('search/<str:search_word>', views.search_all, name='search-all'),
+    path('search/', views.search_all, name='search-all'),
 ]

@@ -1,0 +1,7 @@
+<a href="{% url 'detail' book.pk %}" class="w-52 h-5/6 flex flex-col items-center border rounded-md mx-3 cursor-pointer">
+    <img class="w-48 h-5/6 py-1" src="{{ book.book_img }}" alt="">
+    <div class="w-full h-1/6 flex flex-col justify-center items-center border-t">
+        <div>{{ book.book_name }}</div>
+        <div class="">{{ book.price|floatformat:"g" }}원</div>
+    </div>
+</a>
