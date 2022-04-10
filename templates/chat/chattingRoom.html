@@ -22,9 +22,22 @@
     const roomId = '{{ room.id }}'
     const url = '{{ request.path }}'
 
-    socket.on("sendMessage", ({ message, user }) => {
-        let html = ''
+    socket.on("sendMessage", async({ message, user, userCount }) => {
+        let html = '';
+        let data = new FormData()
+        data.append('chat_room_id',roomId)
         if (me != user.talker){
+            data.append('user', me)
+            if (userCount>1){
+                await axios({
+                    method:'POST',
+                    url:url,
+                    data:data,
+                    headers: {
+                        "X-CSRFToken": '{{csrf_token}}', 
+                    }
+                })
+            }
             html = `<div class="mb-6 flex">
                         <img class="w-14 h-14 rounded-full" src="${user.talker_image}" alt="">
                         <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">
@@ -33,6 +46,17 @@
                         <span class="flex items-end font-light text-sm">${user.time}</span>
                     </div>`;
         }else{
+            data.append('user', user.talker)
+            if (userCount>1){
+                await axios({
+                    method:'POST',
+                    url:url,
+                    data:data,
+                    headers: {
+                        "X-CSRFToken": '{{csrf_token}}', 
+                    }
+                })
+            }
             html = `<div class="mb-6 flex justify-end self-end text-right">
                         <span class="flex items-end font-light text-sm">${user.time}</span>
                         <div class="mt-px p-5 max-w-[270px] break-all mx-3 rounded bg-gray-200">

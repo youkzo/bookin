@@ -47,6 +47,9 @@
         {% else%}
         <div id="menu_items">
             <a href="/chat_room_list"><img src="{% static '/img/nav_msg.png' %}"></a>
+            {% if user_new_message_exists %}
+            <div>new message</div>
+            {% endif %}
         </div>
         <div id="menu_items">
             <img class="cursor-pointer" onclick="dropdown();" src="{% static '/img/nav_my.png' %}">
