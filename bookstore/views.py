@@ -15,7 +15,7 @@ def mystore(request, pk):
         # 로그인한 유저의 스토어정보 & 업로드한 도서정보 불러오기
         owner = BookStoreModel.objects.get(user_id=pk)
         print('pk:', pk, 'owner.user.pk:',owner.user.pk, 'owner.user_id:', owner.user_id)
-        books = BooksModel.objects.filter(user_id=pk)
+        books = BooksModel.objects.filter(user_id=pk).order_by('-created_at')  
 
         # 도서 업로드
         if 'books_upload' in request.POST:
