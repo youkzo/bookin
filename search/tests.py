@@ -21,4 +21,4 @@ class TestSearch(TestCase):
 
         # Then
         self.assertEqual(test_book, book[0])
-        self.assertEqual(test_store, store[0])
+        self.assertEqual(1, len(store))

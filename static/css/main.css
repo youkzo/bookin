@@ -3,6 +3,9 @@
     height: 45vh;
 }
 
+.category_menu {
+    margin: 20px 0 0 20px;
+}
 
 .store_img{
     width: 250px;

@@ -10,6 +10,7 @@ class Message(BaseModel):
     chat_room = models.ForeignKey(
         "ChatRoom", related_name="messages", on_delete=models.CASCADE
     )
+    is_readed = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} : {self.message}"
@@ -25,6 +26,12 @@ class ChatRoom(BaseModel):
         for user in self.participants.all():
             usernames.append(user.username)
         return ", ".join(usernames)
+
+    def exist_new_message(self, user_id):
+        return self.messages.exclude(user_id=user_id).filter(is_readed=False).exists()
+
+    def read_messages(self, user_id):
+        self.messages.exclude(user_id=user_id).update(is_readed=True)
 
     def count_messages(self):
         return self.messages.count()
