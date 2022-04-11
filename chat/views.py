@@ -19,7 +19,7 @@ def chatting_room(request, username):
         user = request.user.is_authenticated
         if user:
             my_room = go_chat_room(request.user.username, username)
-            return render(request, "chat/chattingRoom.html", {'room': my_room})
+            return render(request, "chat/chattingRoom.html", {'room': my_room, 'messages': my_room.messages.all().order_by('created_at')})
         else:
             return redirect('/')
     elif request.method == 'POST':

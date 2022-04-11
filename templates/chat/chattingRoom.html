@@ -103,7 +103,7 @@
             {% if room.messages.count == 0 %}
                 메세지가 없습니다
             {% else %}
-            {% for message in room.messages.all %}
+            {% for message in messages %}
             {% if message.user.username == user.username %}
             <div class="mb-6 flex justify-end self-end text-right">
                 <span class="flex items-end font-light text-sm">{{message.created_at|time:"A h:i"}}</span>
