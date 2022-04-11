@@ -12,8 +12,16 @@ def like_book(request):
 
     if like:
         undo_like(user.id, book)
-        print('싫어요')
+        liked = False
+        like_count = BooksModel.objects.get(id=book).like_count
+
     else:
         do_like(user.id, book)
-        print('좋아요')
-    return JsonResponse({"status": 'Success'})
+        liked = True
+        like_count = BooksModel.objects.get(id=book).like_count
+
+    context = {
+        "liked": liked,
+        "like_count": like_count
+    }
+    return JsonResponse(context)
