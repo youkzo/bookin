@@ -9,7 +9,7 @@
 
 {# css 파일 넣는 곳#}
 {% block css %}
-  <link rel="stylesheet" href="{% static '/css/detail.css' %}">
+  <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock %}
 
 {#자바스크립트 파일 넣는 곳#}
@@ -71,11 +71,8 @@
                 .classList
                 .remove("fill-red-500", "text-red-500");
               $('#like_count').html(response.data.like_count)
-
             }
-
           }
-
         })
         .catch(function error(error) {
           console.log(error)
@@ -106,22 +103,22 @@
       {{book.category }}</div>
     <div id="book_like" class="book_like">좋아요:
       <span id="like_count">{{book.like_count}}</span>
-      {%if like_exists %}
+      {% if like_exists %}
         <button class="do-like-btn" onclick="like({{book.id}});">
           <svg id="do_like" class="h-6 w-6 fill-red-500 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
           </svg>
         </button>
 
-        {%endif%}
-        {%if not like_exists %}
+        {% endif %}
+        {% if not like_exists %}
           <button class="un-do-like-btn" onclick="like({{book.id}});">
             <svg id="undo_like" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
             </svg>
           </button>
 
-          {%endif%}
+        {% endif%}
 
         </div>
         <!-- <div class="book_info">평점: {{book.rating }}</div> -->
